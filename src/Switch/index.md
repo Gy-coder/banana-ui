@@ -1,7 +1,7 @@
 ---
 title: Swtich
 nav:
-  title: 数据录入
+  title: Swtich
   path: /components
 ---
 

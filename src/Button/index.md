@@ -1,7 +1,7 @@
 ---
 title: Button
 nav:
-  title: 基础组件
+  title: Button
   path: /components
 ---
 

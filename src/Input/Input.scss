@@ -1,0 +1,40 @@
+$height: 32px;
+$border-color: #999;
+$border-hover-color: #666;
+$border-radius: 4px;
+$font-size: 12px;
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$red: #fa415d;
+.g-input-wrapper {
+  display: inline-flex;
+  font-size: $font-size;
+  align-items: center;
+  > :not(:last-child) {
+    margin-right: 0.5em;
+  }
+  > .g-input {
+    height: $height;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 0 8px;
+    outline: none;
+    &:hover {
+      border-color: $border-hover-color;
+    }
+    &:focus {
+      box-shadow: inset 0 1px 3px $box-shadow-color;
+    }
+    &[disabled],
+    &[readonly] {
+      border-color: #aaa;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+    &.error {
+      border-color: $red;
+    }
+  }
+  .error-message {
+    color: $red;
+  }
+}

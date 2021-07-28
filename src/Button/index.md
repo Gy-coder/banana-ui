@@ -1,7 +1,7 @@
 ---
 title: Button
 nav:
-  title: Button
+  title: 基础组件
   path: /components
 ---
 
@@ -40,3 +40,5 @@ nav:
 <code src="./demos/level.tsx" />
 <code src="./demos/disabled.tsx">
 <code src="./demos/loading.tsx" />
+
+<API src="./Button.tsx"/>

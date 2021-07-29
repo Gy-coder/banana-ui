@@ -10,9 +10,15 @@ nav:
 
 banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的页面
 
+# 组件列表
+
 ### 基础组件
 
 - [Button 按钮](components/button)
+
+### 布局
+
+- [Layout 布局](/components/layout)
 
 ### 数据录入
 
@@ -23,7 +29,11 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 
 - [Tabs 标签页](/components/tabs)
 
-## 反馈
+### 反馈
 
 - [Dialog 对话框](components/dialog)
 - [Toast 吐司](components/toast)
+
+### 导航
+
+- [Pagination 分页](/components/pagination)

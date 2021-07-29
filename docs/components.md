@@ -17,7 +17,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 ### 数据录入
 
 - [Switch 开关](components/switch)
-- [Input 输入框](components/input/input)
+- [Input 输入框](components/input)
 
 ### 数据展示
 

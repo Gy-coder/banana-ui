@@ -1,0 +1,50 @@
+.g-dialog {
+  background: white;
+  position: fixed;
+  min-width: 20em;
+  min-height: 10em;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: fade-out(black, 0.5);
+  }
+  &-header {
+    font-size: 22px;
+    padding: 8px 16px;
+    border-bottom: 1px solid grey;
+  }
+  &-content {
+    min-height: 6em;
+    padding: 8px 16px;
+  }
+  &-footer {
+    border-top: 1px solid grey;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-close {
+    cursor: pointer;
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    background: #40a9ff;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > .g-icon {
+      fill: white;
+    }
+  }
+}

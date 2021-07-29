@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from '../Button';
+// @ts-ignore
+import { Button } from 'banana-ui';
 
 const Demo = () => {
   return (

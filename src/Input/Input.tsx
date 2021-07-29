@@ -3,6 +3,9 @@ import classnames from 'classnames';
 import './Input.scss';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * @description 错误时显示的文字
+   */
   error?: string;
 }
 

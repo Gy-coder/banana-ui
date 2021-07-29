@@ -1,0 +1,59 @@
+$font-size: 14px;
+$toast-height: 40px;
+$bg: rgba(0, 0, 0, 0.75);
+
+@keyframes Top {
+  from {
+    top: 0;
+  }
+  to {
+    top: 5%;
+  }
+}
+@keyframes Bottom {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 5%;
+  }
+}
+
+.g-toast {
+  position: fixed;
+  min-height: $toast-height;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: $font-size;
+  line-height: $toast-height;
+  display: flex;
+  align-items: center;
+  background: $bg;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  color: white;
+  padding: 0 16px;
+  z-index: 9999;
+  min-height: $font-size;
+  &-close {
+    padding-left: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  > .line {
+    border-left: 1px solid #666;
+    height: 100%;
+    margin-left: 16px;
+  }
+  &.g-toast-top {
+    top: 5%;
+    animation: Top 0.25s forwards;
+  }
+  &.g-toast-middle {
+    top: 50%;
+  }
+  &.g-toast-bottom {
+    bottom: 5%;
+    animation: Bottom 0.25s forwards;
+  }
+}

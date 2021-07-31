@@ -11,3 +11,4 @@ export { default as Content } from './Layout/Content';
 export { default as Footer } from './Layout/Footer';
 export { default as Sider } from './Layout/Sider';
 export { default as Pagination } from './Pagination/Pagination';
+export { default as Rate } from './Rate/Rate';

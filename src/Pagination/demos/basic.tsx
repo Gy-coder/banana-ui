@@ -10,7 +10,7 @@ const PaginationPage: React.FC = () => {
       <Pagination
         totalPage={50}
         defaultPage={p}
-        onChange={(page:number) => setP(page)}
+        onChange={(page: number) => setP(page)}
       />
     </>
   );

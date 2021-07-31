@@ -1,0 +1,33 @@
+$default: #eff2f7;
+$active: #f9da36;
+.g-rate {
+  display: flex;
+  align-items: center;
+  &-item {
+    width: 1.6em;
+    height: 1.6em;
+    border: none;
+    fill: $default;
+    cursor: pointer;
+    &.active {
+      fill: $active;
+    }
+    & + & {
+      margin-left: 4px;
+    }
+    &:hover {
+      transform: scale(1.2);
+    }
+    &.readonly {
+      &.g-rate-item {
+        cursor: default;
+      }
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
+  &-hint {
+    margin-left: 8px;
+  }
+}

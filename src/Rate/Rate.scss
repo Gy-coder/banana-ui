@@ -1,29 +1,46 @@
 $default: #eff2f7;
 $active: #f9da36;
+$width: 1.6em;
+$height: 1.6em;
 .g-rate {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  &-item {
-    width: 1.6em;
-    height: 1.6em;
-    border: none;
-    fill: $default;
-    cursor: pointer;
-    &.active {
-      fill: $active;
-    }
-    & + & {
-      margin-left: 4px;
-    }
-    &:hover {
-      transform: scale(1.2);
-    }
-    &.readonly {
-      &.g-rate-item {
-        cursor: default;
+  &-wrapper {
+    transition: all 0.3s, outline 0s;
+    position: relative;
+    > .g-rate-item-wrapper {
+      &.half {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 1;
+        z-index: 1;
       }
-      &:hover {
-        transform: scale(1);
+      > .g-rate-item {
+        width: 1.6em;
+        height: 1.6em;
+        fill: $default;
+        cursor: pointer;
+        &.active {
+          fill: $active;
+        }
+        & + & {
+          margin-left: 4px;
+        }
+        &:hover {
+          transform: scale(1.2);
+        }
+        &.readonly {
+          &.g-rate-item {
+            cursor: default;
+          }
+          &:hover {
+            transform: scale(1);
+          }
+        }
       }
     }
   }

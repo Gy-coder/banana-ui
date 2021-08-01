@@ -7,11 +7,12 @@ interface Props {
   curValue: number;
   onClick: (value: number) => void;
   allowClear: boolean;
+  allowHalf: boolean;
   readonly: boolean;
 }
 
 const RateItem: React.FC<Props> = (props) => {
-  const { value, onClick, curValue, allowClear, readonly } = props;
+  const { value, onClick, curValue, allowClear, readonly, allowHalf } = props;
   const classes = classnames('g-rate-item', {
     active: value <= curValue,
     readonly,

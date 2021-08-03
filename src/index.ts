@@ -14,4 +14,4 @@ export { default as Pagination } from './Pagination/Pagination';
 export { default as Rate } from './Rate/Rate';
 export { default as Radio } from './Radio/Radio';
 export { default as RadioGroup } from './Radio/RadioGroup';
-export { default as Tree } from './Tree/Tree';
+export { default as Tree, sourceDataItem } from './Tree/Tree';

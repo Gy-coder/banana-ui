@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // @ts-ignore
-import { Tree } from 'banana-ui';
+import { Tree, sourceDataItem } from 'banana-ui';
 
 const Demo = () => {
   const [array, setArray] = useState([
@@ -28,7 +28,17 @@ const Demo = () => {
       ],
     },
   ]);
-  return <Tree sourceData={array} selected={['1.1.1', '1.1.2']} />;
+  const [selectedValue, setSelectedValue] = useState<sourceDataItem[]>([]);
+  const onChange = (item: sourceDataItem, bool: boolean) => {
+    if (bool === true) {
+      setSelectedValue([...selectedValue, item.value]);
+    } else {
+      setSelectedValue(selectedValue.filter((value) => value !== item.value));
+    }
+  };
+  return (
+    <Tree sourceData={array} selected={selectedValue} onChange={onChange} />
+  );
 };
 
 export default Demo;

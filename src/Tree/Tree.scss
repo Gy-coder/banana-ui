@@ -1,0 +1,15 @@
+.g-tree {
+  &-item {
+    line-height: 1.5;
+    @for $n from 1 to 100 {
+      &.#{level-}#{$n} {
+        > .g-tree-item-text {
+          padding-left: ($n - 1) + em;
+          &:hover {
+            background: lightyellow;
+          }
+        }
+      }
+    }
+  }
+}

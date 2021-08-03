@@ -22,8 +22,9 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 
 ### 数据录入
 
-- [Switch 开关](components/switch)
-- [Input 输入框](components/input)
+- [Switch 开关](/components/switch)
+- [Input 输入框](/components/input)
+- [Radio 单选框](/components/radio)
 - [Rate 评分](/components/rate)
 
 ### 数据展示
@@ -32,8 +33,8 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 
 ### 反馈
 
-- [Dialog 对话框](components/dialog)
-- [Toast 吐司](components/toast)
+- [Dialog 对话框](/components/dialog)
+- [Toast 吐司](/components/toast)
 
 ### 导航
 

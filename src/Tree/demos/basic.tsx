@@ -37,7 +37,12 @@ const Demo = () => {
     }
   };
   return (
-    <Tree sourceData={array} selected={selectedValue} onChange={onChange} />
+    <Tree
+      sourceData={array}
+      selected={selectedValue}
+      onChange={onChange}
+      mutiple
+    />
   );
 };
 

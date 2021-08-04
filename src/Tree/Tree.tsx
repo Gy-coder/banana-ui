@@ -1,68 +1,86 @@
-import React from 'react';
+import React, { ChangeEventHandler, useState } from 'react';
 import classnames from 'classnames';
+import { AiFillCaretDown} from 'react-icons/ai';
 import './Tree.scss';
 
 export interface sourceDataItem {
   text: string;
   value: string;
   children: sourceDataItem[];
-  onChange: (item: sourceDataItem, bool: boolean) => void;
 }
 
 type A = {
   selected: Array<string>;
-  mutiple: true;
+  multiple: true;
+  onChange: (newSelected: Array<string>) => void;
 };
 
 type B = {
   selected: string;
-  mutiple: false;
+  multiple?: false;
+  onChange: (newSelected: string) => void;
 };
 
 type Props = {
   sourceData: Array<sourceDataItem>;
-  onChange: (item: sourceDataItem, bool: boolean) => void;
 } & (A | B);
 
-const renderItem = (
-  item: sourceDataItem,
-  selected: string[] | string,
-  onChange: (item: sourceDataItem, bool: boolean) => void,
-  level = 1,
-) => {
-  const classes = classnames('g-tree-item', {
-    [`level-${level}`]: level,
-  });
-  return (
-    <div key={item.value} className={classes}>
-      <div className="g-tree-item-text">
-        <input
-          type="checkbox"
-          checked={selected.includes(item.value)}
-          onChange={(e) => onChange(item, e.target.checked)}
-        />
-        {item.text}
+const Tree: React.FC<Props> = (props) => {
+  const { sourceData, selected, onChange, multiple } = props;
+  const renderItem = (item: sourceDataItem, level = 1) => {
+    const [expended, setExpended] = useState(true);
+    const classes = classnames('g-tree-item', {
+      [`level-${level}`]: level,
+    });
+    const checked = multiple
+      ? selected.includes(item.value)
+      : selected === item.value;
+    const change: ChangeEventHandler<HTMLInputElement> = (e) => {
+      if (multiple) {
+        if (e.target.checked) {
+          // @ts-ignore
+          onChange([...selected, item.value]);
+        } else {
+          // @ts-ignore
+          onChange(selected.filter((value: string) => value !== item.value));
+        }
+      } else {
+        // @ts-ignore
+        onChange(item.value);
+      }
+    };
+    const handleExpend = () => {
+      setExpended(!expended);
+    };
+    return (
+      <div key={item.value} className={classes}>
+        <div className="g-tree-item-text">
+          <span
+            className={classnames('icon', { collapsed: !expended })}
+            onClick={handleExpend}
+          >
+            {item.children && <AiFillCaretDown />}
+          </span>
+          <input type="checkbox" checked={checked} onChange={change} />
+          {item.text}
+        </div>
+        <div
+          className={classnames('g-tree-children', { collapsed: !expended })}
+        >
+          {item.children?.map((sub) => {
+            return renderItem(sub, level + 1);
+          })}
+        </div>
       </div>
-      {item.children?.map((sub) => {
-        return renderItem(sub, selected, onChange, level + 1);
+    );
+  };
+  return (
+    <div className="g-tree">
+      {sourceData.map((item) => {
+        return renderItem(item);
       })}
     </div>
   );
-};
-
-const Tree: React.FC<Props> = (props) => {
-  const { sourceData, selected, onChange, mutiple } = props;
-  if (mutiple === true) {
-    return (
-      <div className="g-tree">
-        {sourceData.map((item) => {
-          return renderItem(item, selected, onChange);
-        })}
-      </div>
-    );
-  } else {
-    return <div>未完成</div>;
-  }
 };
 
 export default Tree;

@@ -4,11 +4,37 @@
     @for $n from 1 to 100 {
       &.#{level-}#{$n} {
         > .g-tree-item-text {
+          display: block;
           padding-left: ($n - 1) + em;
           &:hover {
             background: lightyellow;
           }
+          > .icon {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            width: 1em;
+            height: 1em;
+            > svg {
+              transform: rotate(0deg);
+              transition: all 0.25s;
+              display: inline-block;
+              vertical-align: baseline;
+            }
+            &.collapsed {
+              > svg {
+                transform: rotate(-90deg);
+                transition: all 0.25s;
+              }
+            }
+          }
         }
+      }
+    }
+    > .g-tree-children {
+      &.collapsed {
+        height: 0;
+        overflow: hidden;
       }
     }
   }

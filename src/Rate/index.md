@@ -29,7 +29,7 @@ nav:
 
 <code src="./demos/readonly.tsx" />
 
-#### 允许点击清楚
+#### 允许点击清除
 
 <code src="./demos/allowClear.tsx" />
 

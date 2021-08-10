@@ -1,7 +1,6 @@
-import React, { ChangeEventHandler, useState } from 'react';
-import classnames from 'classnames';
-import { AiFillCaretDown} from 'react-icons/ai';
+import React from 'react';
 import './Tree.scss';
+import TreeItem from '@/Tree/TreeItem';
 
 export interface sourceDataItem {
   text: string;
@@ -21,63 +20,23 @@ type B = {
   onChange: (newSelected: string) => void;
 };
 
-type Props = {
+export type TreeProps = {
   sourceData: Array<sourceDataItem>;
 } & (A | B);
 
-const Tree: React.FC<Props> = (props) => {
+const Tree: React.FC<TreeProps> = (props) => {
   const { sourceData, selected, onChange, multiple } = props;
-  const renderItem = (item: sourceDataItem, level = 1) => {
-    const [expended, setExpended] = useState(true);
-    const classes = classnames('g-tree-item', {
-      [`level-${level}`]: level,
-    });
-    const checked = multiple
-      ? selected.includes(item.value)
-      : selected === item.value;
-    const change: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (multiple) {
-        if (e.target.checked) {
-          // @ts-ignore
-          onChange([...selected, item.value]);
-        } else {
-          // @ts-ignore
-          onChange(selected.filter((value: string) => value !== item.value));
-        }
-      } else {
-        // @ts-ignore
-        onChange(item.value);
-      }
-    };
-    const handleExpend = () => {
-      setExpended(!expended);
-    };
-    return (
-      <div key={item.value} className={classes}>
-        <div className="g-tree-item-text">
-          <span
-            className={classnames('icon', { collapsed: !expended })}
-            onClick={handleExpend}
-          >
-            {item.children && <AiFillCaretDown />}
-          </span>
-          <input type="checkbox" checked={checked} onChange={change} />
-          {item.text}
-        </div>
-        <div
-          className={classnames('g-tree-children', { collapsed: !expended })}
-        >
-          {item.children?.map((sub) => {
-            return renderItem(sub, level + 1);
-          })}
-        </div>
-      </div>
-    );
-  };
   return (
     <div className="g-tree">
-      {sourceData.map((item) => {
-        return renderItem(item);
+      {sourceData.map((item,index) => {
+        return (
+          <TreeItem
+            treeProps={props}
+            item={item}
+            level={1}
+            key={index}
+          />
+        );
       })}
     </div>
   );

@@ -32,9 +32,12 @@
       }
     }
     > .g-tree-children {
+      transition: height 250ms;
       &.collapsed {
-        height: 0;
         overflow: hidden;
+      }
+      &.gone{
+        height: 0;
       }
     }
   }

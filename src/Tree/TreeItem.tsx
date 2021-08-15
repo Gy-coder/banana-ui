@@ -4,16 +4,19 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { sourceDataItem, TreeProps } from '@/Tree/Tree';
 import { useDidMountEffect } from '@/hooks/useDidMountEffect';
 import { useFlat } from '@/hooks/useFlat';
+import { useIntersection } from '@/hooks/useIntersection';
 
 interface Props {
   item: sourceDataItem;
   level: number;
   treeProps: TreeProps;
+  onItemChange: (value: string[])=>void
 }
 
 const TreeItem: React.FC<Props> = (props) => {
   const { item, level, treeProps } = props;
   const [expended, setExpended] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null)
   const classes = classnames('g-tree-item', {
     [`level-${level}`]: level,
   });
@@ -60,13 +63,12 @@ const TreeItem: React.FC<Props> = (props) => {
   }
   const change: ChangeEventHandler<HTMLInputElement> = (e) => {
     const childrenValues = collectChildrenValues(item)
-    console.log(childrenValues);
     if (treeProps.multiple) {
       if (e.target.checked) {
         // @ts-ignore
-        treeProps.onChange([...treeProps.selected, item.value,...childrenValues]);
+        props.onItemChange([...treeProps.selected, item.value,...childrenValues]);
       } else {
-        treeProps.onChange(
+        props.onItemChange(
           treeProps.selected.filter((value: string) => value !== item.value && childrenValues.indexOf(value) === -1),
         );
       }
@@ -78,6 +80,21 @@ const TreeItem: React.FC<Props> = (props) => {
       }
     }
   };
+  const onItemChange = (values:string[]) => {
+    const childrenValues = collectChildrenValues(item)
+    const common = useIntersection(values,childrenValues)
+    if(common.length !== 0){
+      props.onItemChange(Array.from(new Set(values.concat(item.value))))
+      if(common.length === childrenValues.length){
+        inputRef.current!.indeterminate = false
+      }else{
+        inputRef.current!.indeterminate = true
+      }
+    }else{
+      props.onItemChange(values.filter(v=>v !== item.value))
+      inputRef.current!.indeterminate = false
+    }
+  }
   const handleExpend = () => {
     setExpended(!expended);
   };
@@ -90,7 +107,7 @@ const TreeItem: React.FC<Props> = (props) => {
         >
           {item.children && <AiFillCaretDown />}
         </span>
-        <input type="checkbox" checked={checked} onChange={change} />
+        <input ref={inputRef} type="checkbox" checked={checked} onChange={change} />
         {item.text}
       </div>
       <div
@@ -104,6 +121,7 @@ const TreeItem: React.FC<Props> = (props) => {
               treeProps={treeProps}
               level={level + 1}
               key={index}
+              onItemChange={onItemChange}
             />
           );
         })}

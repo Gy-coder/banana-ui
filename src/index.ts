@@ -15,3 +15,5 @@ export { default as Rate } from './Rate/Rate';
 export { default as Radio } from './Radio/Radio';
 export { default as RadioGroup } from './Radio/RadioGroup';
 export { default as Tree, sourceDataItem } from './Tree/Tree';
+export { default as Collapse } from './Collapse/Collapse';
+export { default as CollapseItem } from './Collapse/CollapseItem';

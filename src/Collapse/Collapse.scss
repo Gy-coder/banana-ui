@@ -1,0 +1,33 @@
+$grey: #ddd;
+$border-radius: 4px;
+.g-collapse {
+  border: 1px solid $grey;
+  border-radius: $border-radius;
+
+  > .g-collapse-item {
+    > .g-collapse-item-title {
+      border: 1px solid $grey;
+      margin: -1px;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      cursor: pointer;
+    }
+    &:first-child {
+      > .g-collapse-item-title {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+    }
+    &:last-child {
+      > .g-collapse-item-title:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+    > .g-collapse-item-content {
+      padding: 8px;
+    }
+  }
+}

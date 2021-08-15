@@ -15,15 +15,14 @@ interface Props {
   style?: React.CSSProperties;
   /**
    * 可以这样写属性描述
-   * @description     Switch的默认值
-   * @default         false
+   * @description     Switch的选中值
    */
-  defalutValue?: boolean;
+  value: boolean;
   /**
    * 可以这样写属性描述
    * @description     checked改变时的回调函数
    */
-  onChange?: (value: boolean) => void;
+  onChange: (value: boolean) => void;
   /**
    * 可以这样写属性描述
    * @description     是否禁用
@@ -39,18 +38,14 @@ interface Props {
 }
 
 const Switch: React.FC<Props> = (props) => {
-  const { className, style, disabled, defalutValue, onChange, loading } = props;
-  const [checked, setChecked] = useState(defalutValue || false);
+  const { className, style, disabled, value, onChange, loading } = props;
   const classNames = classnames('g-switch', className, {
-    'g-switch-checked': checked,
+    'g-switch-checked': value,
     disabled: disabled,
   });
-  useEffect(() => {
-    if (props.onChange) props.onChange(checked);
-  }, [checked]);
   const handleClick = () => {
     if (disabled) return;
-    setChecked(!checked);
+    onChange(!value)
   };
   return (
     <div className={classNames} style={style} onClick={handleClick}>

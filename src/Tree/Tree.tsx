@@ -28,15 +28,8 @@ const Tree: React.FC<TreeProps> = (props) => {
   const { sourceData, selected, onChange, multiple } = props;
   return (
     <div className="g-tree">
-      {sourceData.map((item,index) => {
-        return (
-          <TreeItem
-            treeProps={props}
-            item={item}
-            level={1}
-            key={index}
-          />
-        );
+      {sourceData.map((item, index) => {
+        return <TreeItem treeProps={props} item={item} level={1} key={index} />;
       })}
     </div>
   );

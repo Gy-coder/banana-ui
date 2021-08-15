@@ -11,23 +11,21 @@ interface PaginationProps {
    */
   totalPage: number;
   /**
-   * @description 默认当前页面
-   * @default     1
+   * @description 当前页面
    */
-  defaultPage?: number;
+  curPage: number;
   /**
    * 页面改变时的回调函数
    */
-  onChange?: (page: number) => void;
+  onChange: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = (props) => {
-  const { totalPage, onChange, defaultPage = 1 } = props;
-  const [curPage, setCurPage] = useState(defaultPage);
+  const { totalPage, onChange, curPage } = props;
   const { pages } = usePages(totalPage, curPage);
   const onClickPage = (page: number, e: React.MouseEvent) => {
     e.preventDefault();
-    if (page >= 1 && page <= totalPage) setCurPage(page);
+    if (page >= 1 && page <= totalPage) onChange(page);
   };
   useEffect(() => {
     if (onChange) onChange(curPage);

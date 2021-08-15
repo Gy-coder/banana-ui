@@ -20,4 +20,4 @@ nav:
 <code src="./demos/disabled.tsx" />
 <code src="./demos/loading.tsx" />
 
-<API src="./Switch.tsx">
+<API src="./Switch.tsx" />

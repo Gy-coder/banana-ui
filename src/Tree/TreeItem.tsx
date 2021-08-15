@@ -7,8 +7,8 @@ import { useDidMountEffect } from '@/hooks/useDidMountEffect';
 interface Props {
   item: sourceDataItem;
   level: number;
-  treeProps: TreeProps
-};
+  treeProps: TreeProps;
+}
 
 const TreeItem: React.FC<Props> = (props) => {
   const { item, level, treeProps } = props;
@@ -25,11 +25,13 @@ const TreeItem: React.FC<Props> = (props) => {
       if (!divRef.current) return;
       divRef.current.style.height = 'auto';
       const { height } = divRef.current.getBoundingClientRect();
-      divRef.current.style.height = '0px'
+      divRef.current.style.height = '0px';
       divRef.current.getBoundingClientRect();
       divRef.current.style.height = height + 'px';
       const afterExpand = () => {
-        if (!divRef.current) {return;}
+        if (!divRef.current) {
+          return;
+        }
         divRef.current.style.height = '';
         divRef.current.classList.add('present');
         divRef.current.removeEventListener('transitionend', afterExpand);
@@ -41,12 +43,14 @@ const TreeItem: React.FC<Props> = (props) => {
       divRef.current.style.height = height + 'px';
       divRef.current.getBoundingClientRect();
       divRef.current.style.height = '0px';
-      const afterCollapse = ()=>{
-        if (!divRef.current) {return;}
+      const afterCollapse = () => {
+        if (!divRef.current) {
+          return;
+        }
         divRef.current.style.height = '';
         divRef.current.classList.add('gone');
         divRef.current.removeEventListener('transitionend', afterCollapse);
-      }
+      };
       divRef.current.addEventListener('transitionend', afterCollapse);
     }
   }, [expended]);
@@ -56,7 +60,9 @@ const TreeItem: React.FC<Props> = (props) => {
         // @ts-ignore
         treeProps.onChange([...treeProps.selected, item.value]);
       } else {
-        treeProps.onChange(treeProps.selected.filter((value: string) => value !== item.value));
+        treeProps.onChange(
+          treeProps.selected.filter((value: string) => value !== item.value),
+        );
       }
     } else {
       if (e.target.checked) {
@@ -71,19 +77,29 @@ const TreeItem: React.FC<Props> = (props) => {
   };
   return (
     <div key={item.value} className={classes}>
-      <div className='g-tree-item-text'>
+      <div className="g-tree-item-text">
         <span
           className={classnames('icon', { collapsed: !expended })}
           onClick={handleExpend}
         >
           {item.children && <AiFillCaretDown />}
         </span>
-        <input type='checkbox' checked={checked} onChange={change} />
+        <input type="checkbox" checked={checked} onChange={change} />
         {item.text}
       </div>
-      <div ref={divRef} className={classnames('g-tree-children', { collapsed: !expended })}>
+      <div
+        ref={divRef}
+        className={classnames('g-tree-children', { collapsed: !expended })}
+      >
         {item.children?.map((sub, index) => {
-          return <TreeItem item={sub} treeProps={treeProps} level={level + 1} key={index} />;
+          return (
+            <TreeItem
+              item={sub}
+              treeProps={treeProps}
+              level={level + 1}
+              key={index}
+            />
+          );
         })}
       </div>
     </div>

@@ -5,14 +5,13 @@ import RateItem from './RateItem';
 import { useDidMountEffect } from '@/hooks/useDidMountEffect';
 interface Props {
   /**
-   * @description 默认的Value值
-   * @default     0
+   * @description 选中的Value值
    */
-  defaultValue?: number;
+  value: number;
   /**
    * @description Value的值改变时的回调函数
    */
-  onChange?: (value: number) => void;
+  onChange: (value: number) => void;
   /**
    * @description Rate组件的类名
    */
@@ -40,7 +39,7 @@ interface Props {
 
 const Rate: React.FC<Props> = (props) => {
   const {
-    defaultValue = 0,
+    value,
     onChange,
     className,
     hint,
@@ -48,14 +47,10 @@ const Rate: React.FC<Props> = (props) => {
     allowHalf = false,
     readonly = false,
   } = props;
-  const [value, setValue] = useState(defaultValue);
   const classes = classnames('g-rate', className);
   const handleClick = (value: number) => {
-    setValue(value);
+    onChange(value)
   };
-  useDidMountEffect(() => {
-    if (onChange) onChange(value);
-  }, [value]);
   return (
     <div className={classes}>
       {[1, 2, 3, 4, 5].map((item) => {
@@ -94,7 +89,3 @@ const Rate: React.FC<Props> = (props) => {
 };
 
 export default Rate;
-
-/**
- *
- */

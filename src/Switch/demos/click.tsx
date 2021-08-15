@@ -8,7 +8,7 @@ const Demo = () => {
     <>
       x:{x.toString()}
       <br />
-      <Switch defalutValue={x} onChange={(value: boolean) => setX(value)} />
+      <Switch value={x} onChange={(value: boolean) => setX(value)} />
     </>
   );
 };

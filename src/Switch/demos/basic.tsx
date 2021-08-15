@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { Switch } from 'banana-ui';
 
 const Demo = () => {
+  const [value,setValue] = useState(false)
   return (
     <>
-      <Switch />
-      <br />
-      <Switch defalutValue />
+      <Switch value={value} onChange={(value:boolean)=>setValue(value)}/>
     </>
   );
 };

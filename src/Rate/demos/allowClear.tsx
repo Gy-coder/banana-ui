@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { Rate } from 'banana-ui';
 
 const Demo = () => {
+  const [value,setValue] = useState(0)
+  const handleChange = (value: number)=>{
+    setValue(value)
+    alert(`你选中了${value}`)
+  }
   return (
     <>
-      <Rate defaultValue={0} allowClear={true} />
+      <Rate value={value} onChange={handleChange} allowClear/>
     </>
   );
 };

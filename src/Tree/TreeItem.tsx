@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { sourceDataItem, TreeProps } from '@/Tree/Tree';
 import { useDidMountEffect } from '@/hooks/useDidMountEffect';
+import { useFlat } from '@/hooks/useFlat';
 
 interface Props {
   item: sourceDataItem;
@@ -54,14 +55,19 @@ const TreeItem: React.FC<Props> = (props) => {
       divRef.current.addEventListener('transitionend', afterCollapse);
     }
   }, [expended]);
+  const collectChildrenValues = (item: sourceDataItem): string[]=>{
+    return useFlat(item.children?.map(i=>[i.value,collectChildrenValues(i)]))
+  }
   const change: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const childrenValues = collectChildrenValues(item)
+    console.log(childrenValues);
     if (treeProps.multiple) {
       if (e.target.checked) {
         // @ts-ignore
-        treeProps.onChange([...treeProps.selected, item.value]);
+        treeProps.onChange([...treeProps.selected, item.value,...childrenValues]);
       } else {
         treeProps.onChange(
-          treeProps.selected.filter((value: string) => value !== item.value),
+          treeProps.selected.filter((value: string) => value !== item.value && childrenValues.indexOf(value) === -1),
         );
       }
     } else {

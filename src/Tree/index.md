@@ -11,4 +11,5 @@ nav:
 
 <code src="./demos/basic.tsx" />
 <code src="./demos/single.tsx" />
+<code src="./demos/autoSelect.tsx" />
 <API src="./Tree.tsx" />

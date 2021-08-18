@@ -20,4 +20,4 @@ npm install banana-ui
 yarn add banana-ui
 ```
 
-下一章: [快速开始](quickstart)
+下一章: [快速开始](./quickstart.md)

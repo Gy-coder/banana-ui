@@ -5,6 +5,7 @@ import { sourceDataItem, TreeProps } from '@/Tree/Tree';
 import { useDidMountEffect } from '@/hooks/useDidMountEffect';
 import { useFlat } from '@/hooks/useFlat';
 import { useIntersection } from '@/hooks/useIntersection';
+import { useToggle } from '@/Tree/useToggle';
 
 interface Props {
   item: sourceDataItem;
@@ -13,10 +14,13 @@ interface Props {
   onItemChange: (value: string[])=>void
 }
 
+const collectChildrenValues = (item: sourceDataItem): string[]=>{
+  return useFlat(item.children?.map(i=>[i.value,collectChildrenValues(i)]))
+}
+
 const TreeItem: React.FC<Props> = (props) => {
   const { item, level, treeProps } = props;
-  const [expended, setExpended] = useState(true);
-  const inputRef = useRef<HTMLInputElement>(null)
+  const {expended,handleExpend} = useToggle(true)
   const classes = classnames('g-tree-item', {
     [`level-${level}`]: level,
   });
@@ -58,9 +62,6 @@ const TreeItem: React.FC<Props> = (props) => {
       divRef.current.addEventListener('transitionend', afterCollapse);
     }
   }, [expended]);
-  const collectChildrenValues = (item: sourceDataItem): string[]=>{
-    return useFlat(item.children?.map(i=>[i.value,collectChildrenValues(i)]))
-  }
   const change: ChangeEventHandler<HTMLInputElement> = (e) => {
     const childrenValues = collectChildrenValues(item)
     if (treeProps.multiple) {
@@ -80,24 +81,18 @@ const TreeItem: React.FC<Props> = (props) => {
       }
     }
   };
+  const inputRef = useRef<HTMLInputElement>(null)
   const onItemChange = (values:string[]) => {
     const childrenValues = collectChildrenValues(item)
     const common = useIntersection(values,childrenValues)
     if(common.length !== 0){
       props.onItemChange(Array.from(new Set(values.concat(item.value))))
-      if(common.length === childrenValues.length){
-        inputRef.current!.indeterminate = false
-      }else{
-        inputRef.current!.indeterminate = true
-      }
+      inputRef.current!.indeterminate = common.length !== childrenValues.length;
     }else{
       props.onItemChange(values.filter(v=>v !== item.value))
       inputRef.current!.indeterminate = false
     }
   }
-  const handleExpend = () => {
-    setExpended(!expended);
-  };
   return (
     <div key={item.value} className={classes}>
       <div className="g-tree-item-text">

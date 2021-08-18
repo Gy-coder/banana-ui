@@ -17,4 +17,4 @@ banana-ui 是一款基于 React 和 TypeScript 的 UI 组件库。
 
 **强烈不建议你将此 UI 库用于生产环境**。但如果你是抱着看源代码的目的来的，那么这个库还是值得一看的。[源代码可以点击](https://github.com/Gy-coder/react-new-ui-components)，你可以直接查看每个组件的源代码和示例，运行方法见 README.md。
 
-下一章: [安装](install)
+下一章: [安装](./install.md)

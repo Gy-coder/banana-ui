@@ -22,4 +22,4 @@ deploy:
   keep_history: true
   local_dir: docs-dist
   on:
-    branch: main
+    branch: master

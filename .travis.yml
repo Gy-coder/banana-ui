@@ -9,7 +9,7 @@ install:
   - yarn install --frozen-lockfile
 
 script:
-  - yarn run docs:build
+  - cross-env PUBLIC_PATH=/banana-ui/ yarn run docs:build
 
 deploy:
   provider: pages

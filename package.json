@@ -33,6 +33,8 @@
     "react": "^16.12.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^27.0.1",
     "@types/node-sass": "^4.11.2",
     "@types/react-icons": "^3.0.0",
     "@types/sass-loader": "^8.0.2",

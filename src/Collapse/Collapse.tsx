@@ -9,8 +9,7 @@ interface Props {
 }
 
 const Collapse: React.FC<Props> = (props) => {
-  const { selected, children, onChange, multiple = true } = props;
-  console.log(multiple);
+  const { selected = [], children, onChange, multiple = true } = props;
   const handleChange = (name: string) => {
     let selectedCopy = JSON.parse(JSON.stringify(selected));
     if (multiple === false) {
@@ -34,7 +33,7 @@ const Collapse: React.FC<Props> = (props) => {
       const childElement =
         child as React.FunctionComponentElement<CollapseItemProps>;
       return React.cloneElement(childElement, {
-        selected,
+        selected: selected,
         title: childElement.props.title,
         name: childElement.props.name,
         change: (name: string) => handleChange(name),

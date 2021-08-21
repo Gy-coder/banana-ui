@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<DocumentFragment>
+  <label
+    class="g-checkbox-wrapper checked"
+  >
+    <span
+      class="g-checkbox"
+    >
+      <span
+        class="g-checkbox-inner"
+      />
+      <input
+        checked=""
+        type="checkbox"
+        value="one"
+      />
+    </span>
+    <span
+      class="g-checkbox-tips"
+    >
+      Option One
+    </span>
+  </label>
+</DocumentFragment>
+`;

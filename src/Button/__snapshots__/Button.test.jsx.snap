@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="g-button g-theme-button g-size-normal g-level-normal"
+  >
+    Click Me
+  </button>
+</DocumentFragment>
+`;

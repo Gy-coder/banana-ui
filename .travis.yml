@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - 14
+
+cache: yarn
+
+install:
+  - yarn install --frozen-lockfile
+
+script:
+  - cross-env PUBLIC_PATH=/banana-ui/ yarn run docs:build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: docs-dist
+  on:
+    branch: master

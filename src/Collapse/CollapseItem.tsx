@@ -9,7 +9,7 @@ const CollapseItem: React.FC<CollapseItemProps> = (props) => {
     change(props.name);
   };
   useEffect(() => {
-    if (selected.includes(props.name)) setOpen(true);
+    if (selected?.includes(props.name)) setOpen(true);
     else setOpen(false);
   }, [selected]);
   return (
@@ -17,9 +17,11 @@ const CollapseItem: React.FC<CollapseItemProps> = (props) => {
       <div className="g-collapse-item-title" onClick={handleClick}>
         {title}
       </div>
-      {open && <div className={classnames('g-collapse-item-content', { open })}>
-        {children}
-      </div>}
+      {open && (
+        <div className={classnames('g-collapse-item-content', { open })}>
+          {children}
+        </div>
+      )}
     </div>
   );
 };

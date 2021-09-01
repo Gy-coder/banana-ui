@@ -3,18 +3,14 @@ import React, { useState } from 'react';
 import { Rate } from 'banana-ui';
 
 const Demo = () => {
-  const [value,setValue] = useState(1)
-  const handleChange = (value: number)=>{
-    setValue(value)
-    alert(`你选中了${value}`)
-  }
+  const [value, setValue] = useState(1);
+  const handleChange = (value: number) => {
+    setValue(value);
+    alert(`你选中了${value}`);
+  };
   return (
     <>
-      <Rate
-        value={value}
-        onChange={handleChange}
-        readonly
-      />
+      <Rate value={value} onChange={handleChange} readonly />
     </>
   );
 };

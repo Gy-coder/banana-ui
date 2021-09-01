@@ -19,3 +19,4 @@ export { default as Collapse } from './Collapse/Collapse';
 export { default as CollapseItem } from './Collapse/CollapseItem';
 export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as CheckboxGroup } from './Checkbox/CheckboxGroup';
+export { default as Popover } from './Popover/Popover';

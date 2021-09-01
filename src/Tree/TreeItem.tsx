@@ -11,16 +11,18 @@ interface Props {
   item: sourceDataItem;
   level: number;
   treeProps: TreeProps;
-  onItemChange: (value: string[])=>void
+  onItemChange: (value: string[]) => void;
 }
 
-const collectChildrenValues = (item: sourceDataItem): string[]=>{
-  return useFlat(item.children?.map(i=>[i.value,collectChildrenValues(i)]))
-}
+const collectChildrenValues = (item: sourceDataItem): string[] => {
+  return useFlat(
+    item.children?.map((i) => [i.value, collectChildrenValues(i)]),
+  );
+};
 
 const TreeItem: React.FC<Props> = (props) => {
   const { item, level, treeProps } = props;
-  const {expended,handleExpend} = useToggle(true)
+  const { expended, handleExpend } = useToggle(true);
   const classes = classnames('g-tree-item', {
     [`level-${level}`]: level,
   });
@@ -63,14 +65,21 @@ const TreeItem: React.FC<Props> = (props) => {
     }
   }, [expended]);
   const change: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const childrenValues = collectChildrenValues(item)
+    const childrenValues = collectChildrenValues(item);
     if (treeProps.multiple) {
       if (e.target.checked) {
         // @ts-ignore
-        props.onItemChange([...treeProps.selected, item.value,...childrenValues]);
+        props.onItemChange([
+          ...treeProps.selected,
+          item.value,
+          ...childrenValues,
+        ]);
       } else {
         props.onItemChange(
-          treeProps.selected.filter((value: string) => value !== item.value && childrenValues.indexOf(value) === -1),
+          treeProps.selected.filter(
+            (value: string) =>
+              value !== item.value && childrenValues.indexOf(value) === -1,
+          ),
         );
       }
     } else {
@@ -81,18 +90,18 @@ const TreeItem: React.FC<Props> = (props) => {
       }
     }
   };
-  const inputRef = useRef<HTMLInputElement>(null)
-  const onItemChange = (values:string[]) => {
-    const childrenValues = collectChildrenValues(item)
-    const common = useIntersection(values,childrenValues)
-    if(common.length !== 0){
-      props.onItemChange(Array.from(new Set(values.concat(item.value))))
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onItemChange = (values: string[]) => {
+    const childrenValues = collectChildrenValues(item);
+    const common = useIntersection(values, childrenValues);
+    if (common.length !== 0) {
+      props.onItemChange(Array.from(new Set(values.concat(item.value))));
       inputRef.current!.indeterminate = common.length !== childrenValues.length;
-    }else{
-      props.onItemChange(values.filter(v=>v !== item.value))
-      inputRef.current!.indeterminate = false
+    } else {
+      props.onItemChange(values.filter((v) => v !== item.value));
+      inputRef.current!.indeterminate = false;
     }
-  }
+  };
   return (
     <div key={item.value} className={classes}>
       <div className="g-tree-item-text">
@@ -102,7 +111,12 @@ const TreeItem: React.FC<Props> = (props) => {
         >
           {item.children && <AiFillCaretDown />}
         </span>
-        <input ref={inputRef} type="checkbox" checked={checked} onChange={change} />
+        <input
+          ref={inputRef}
+          type="checkbox"
+          checked={checked}
+          onChange={change}
+        />
         {item.text}
       </div>
       <div

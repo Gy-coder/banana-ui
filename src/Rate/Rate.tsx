@@ -49,7 +49,7 @@ const Rate: React.FC<Props> = (props) => {
   } = props;
   const classes = classnames('g-rate', className);
   const handleClick = (value: number) => {
-    onChange(value)
+    onChange(value);
   };
   return (
     <div className={classes}>

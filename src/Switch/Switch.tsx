@@ -45,7 +45,7 @@ const Switch: React.FC<Props> = (props) => {
   });
   const handleClick = () => {
     if (disabled) return;
-    onChange(!value)
+    onChange(!value);
   };
   return (
     <div className={classNames} style={style} onClick={handleClick}>

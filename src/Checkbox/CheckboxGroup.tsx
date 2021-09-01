@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 //@ts-ignore
-import { Checkbox, Props as CheckboxProps } from 'banana-ui';
+import Checkbox, {Props as CheckboxProps } from './Checkbox';
 
 interface Props {
   values: string[];

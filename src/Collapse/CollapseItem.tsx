@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 const CollapseItem: React.FC<CollapseItemProps> = (props) => {
   const { title, children, selected, change } = props;
-  const [open, setOpen] = useState<boolean>();
+  const [open, setOpen] = useState<boolean>(false);
   const handleClick = () => {
     change(props.name);
   };
@@ -17,9 +17,11 @@ const CollapseItem: React.FC<CollapseItemProps> = (props) => {
       <div className="g-collapse-item-title" onClick={handleClick}>
         {title}
       </div>
-      {open && <div className={classnames('g-collapse-item-content', { open })}>
-        {children}
-      </div>}
+      {open && (
+        <div className={classnames('g-collapse-item-content', { open })}>
+          {children}
+        </div>
+      )}
     </div>
   );
 };

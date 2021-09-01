@@ -3,12 +3,21 @@ import React, { useState } from 'react';
 import { Switch } from 'banana-ui';
 
 const Demo = () => {
-  const [value,setValue] = useState(false)
+  const [value, setValue] = useState(false);
   return (
     <>
-      <Switch loading value={value} onChange={(value:boolean)=>setValue(value)}/>
+      <Switch
+        loading
+        value={value}
+        onChange={(value: boolean) => setValue(value)}
+      />
       <br />
-      <Switch loading disabled value={value} onChange={(value:boolean)=>setValue(value)}/>
+      <Switch
+        loading
+        disabled
+        value={value}
+        onChange={(value: boolean) => setValue(value)}
+      />
     </>
   );
 };

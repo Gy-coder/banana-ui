@@ -26,18 +26,26 @@ export type TreeProps = {
 
 const Tree: React.FC<TreeProps> = (props) => {
   const { sourceData, selected, onChange, multiple } = props;
-  const onItemChange = (values:any)=>{
-    if(multiple){
+  const onItemChange = (values: any) => {
+    if (multiple) {
       // @ts-ignore
-      onChange(Array.from(new Set(values)))
-    }else{
-      onChange(values)
+      onChange(Array.from(new Set(values)));
+    } else {
+      onChange(values);
     }
-  }
+  };
   return (
     <div className="g-tree">
       {sourceData.map((item, index) => {
-        return <TreeItem treeProps={props} item={item} level={1} key={index} onItemChange={onItemChange}/>;
+        return (
+          <TreeItem
+            treeProps={props}
+            item={item}
+            level={1}
+            key={index}
+            onItemChange={onItemChange}
+          />
+        );
       })}
     </div>
   );

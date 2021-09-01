@@ -10,7 +10,6 @@ interface Props {
 
 const Collapse: React.FC<Props> = (props) => {
   const { selected, children, onChange, multiple = true } = props;
-  console.log(multiple);
   const handleChange = (name: string) => {
     let selectedCopy = JSON.parse(JSON.stringify(selected));
     if (multiple === false) {

@@ -7,5 +7,6 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   sass: {},
+  publicPath: process.env.PUBLIC_PATH ?? '/',
   // more config: https://d.umijs.org/config
 });

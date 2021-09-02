@@ -14,7 +14,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  github_token: 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
   keep_history: true
   local_dir: docs-dist
   on:

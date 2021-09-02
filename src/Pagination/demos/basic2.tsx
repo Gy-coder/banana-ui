@@ -8,7 +8,7 @@ const PaginationPage: React.FC = () => {
     <>
       <div>当前是第{p}页</div>
       <Pagination
-        totalPage={10}
+        totalPage={5}
         curPage={p}
         onChange={(page: number) => setP(page)}
       />

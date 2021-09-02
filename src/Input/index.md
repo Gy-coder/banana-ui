@@ -15,9 +15,20 @@ nav:
 
 # 代码示例
 
+## 基础使用
+
 <code src="./demos/basic.tsx" />
+
+## 禁用 input
+
 <code src="./demos/disabled.tsx" />
+
+## input 只读
+
 <code src="./demos/readonly.tsx" />
+
+## 带有错误提示的 input
+
 <code src="./demos/error.tsx" />
 
 <API src="./Input.tsx" />

@@ -15,6 +15,8 @@ nav:
 
 # 代码示例
 
+## 基础使用
+
 <code src="./demos/basic.tsx" />
 
 # Tabs API

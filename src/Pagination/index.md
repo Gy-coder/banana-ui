@@ -17,6 +17,11 @@ nav:
 
 # 代码示例
 
+## 共有 50 页的分页器
+
 <code src="./demos/basic.tsx" />
+
+## 共有 5 页的分页器
+
 <code src="./demos/basic2.tsx" />
 <API src="./Pagination.tsx" />

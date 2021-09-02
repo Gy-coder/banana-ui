@@ -27,7 +27,18 @@ nav:
 
 # 代码示例
 
+## 不带有 Sider
+
 <code src="./demos/basic.tsx" />
+
+## Sider 在 Content 区域左边
+
 <code src="./demos/basic2.tsx" />
+
+## Sider 在 Content 区域右边
+
 <code src="./demos/basic3.tsx" />
+
+## Sider 在 Main 区域
+
 <code src="./demos/basic4.tsx" />

@@ -17,19 +17,19 @@ nav:
 
 # 代码范例
 
-#### 基础使用
+## 基础使用
 
 <code src="./demos/basic.tsx" />
 
-#### 带有提示信息
+## 带有提示信息
 
 <code src="./demos/hint.tsx" />
 
-#### 只读的组件
+## 只读的组件
 
 <code src="./demos/readonly.tsx" />
 
-#### 允许点击清除
+## 允许点击清除
 
 <code src="./demos/allowClear.tsx" />
 

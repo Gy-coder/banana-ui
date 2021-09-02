@@ -4,8 +4,19 @@ import classnames from 'classnames';
 import './Popover.scss';
 
 interface Props {
+  /**
+   * @description Popver弹出层的内容
+   */
   content: React.ReactNode;
+  /**
+   * @description Popover的位置
+   * @default     'top'
+   */
   position?: 'top' | 'left' | 'bottom' | 'right';
+  /**
+   * @description Popover的弹出方式
+   * @default     'click'
+   */
   trigger?: 'click' | 'hover';
 }
 

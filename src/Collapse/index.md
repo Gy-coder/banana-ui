@@ -18,11 +18,11 @@ Collapse 折叠面板
 
 # 代码示例
 
-### 可以展开多个
+## 可以展开多个
 
 <code src="./demos/basic.tsx" />
 
-### 只能单个展开(手风琴)
+## 只能单个展开(手风琴)
 
 <code src="./demos/single.tsx" />
 

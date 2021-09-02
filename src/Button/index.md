@@ -35,10 +35,24 @@ nav:
 
 # 代码演示
 
+## 基础使用
+
 <code src="./demos/basic.tsx" />
+
+## 控制大小
+
 <code src="./demos/size.tsx" />
+
+## 改变状态
+
 <code src="./demos/level.tsx" />
-<code src="./demos/disabled.tsx">
+
+## 禁用 input
+
+<code src="./demos/disabled.tsx" />
+
+## 带有 loading 的 input
+
 <code src="./demos/loading.tsx" />
 
-<API src="./Button.tsx"/>
+<API src="./Button.tsx" />

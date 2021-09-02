@@ -17,16 +17,50 @@ nav:
 
 # 代码范例
 
+## 基础使用
+
 <code src="./demos/basic.tsx" />
+
+## alert
+
 <code src="./demos/alert.tsx" />
+
+## modal
+
 <code src="./demos/modal.tsx" />
+
+## comfirm
+
 <code src="./demos/confirm.tsx" />
 
-<API src="./Dialog.tsx">
+<API src="./Dialog.tsx" />
 
 ## 函数 API
 
-| 表头   | 表头   |
-| ------ | ------ |
-| 单元格 | 单元格 |
-| 单元格 | 单元格 |
+#### modal
+
+|       Name       |    Description     |      Type      |  Default   |
+| :--------------: | :----------------: | :------------: | :--------: |
+|     content      |    弹出层的内容    |   ReactNode    | (required) |
+|     buttons      |  modal 底部的按钮  | ReactElement[] |     []     |
+|    afterClose    |  关闭后的回调函数  |   () => void   |   ()=>{}   |
+|      title       |    modal 的标题    |     string     |   '提示'   |
+| closeOnClickMask | 点击遮罩层是否关闭 |    boolean     |   false    |
+
+#### alert
+
+|       Name       |    Description     |   Type    |  Default   |
+| :--------------: | :----------------: | :-------: | :--------: |
+|     content      |    弹出层的内容    | ReactNode | (required) |
+|      title       |    modal 的标题    |  string   |   '提示'   |
+| closeOnClickMask | 点击遮罩层是否关闭 |  boolean  |   false    |
+
+## confirm
+
+|       Name       |      Description       |    Type    |  Default   |
+| :--------------: | :--------------------: | :--------: | :--------: |
+|     content      |      弹出层的内容      | ReactNode  | (required) |
+|     success      | 点击确认按钮的回调函数 | ()=> void  |   ()=>{}   |
+|    afterClose    |   点击取消的回调函数   | () => void |   ()=>{}   |
+|      title       |      modal 的标题      |   string   |   '提示'   |
+| closeOnClickMask |   点击遮罩层是否关闭   |  boolean   |   false    |

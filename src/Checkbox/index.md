@@ -17,9 +17,16 @@ nav:
 
 # 代码示例
 
+## 基础使用
+
 <code src="./demos/basic.tsx" />
 
+## 配合 Group 使用
+
 <code src="./demos/group.tsx" />
+
+## Group 的禁用
+
 <code src="./demos/groupDisabled.tsx" />
 
 <API src="./Checkbox.tsx" />

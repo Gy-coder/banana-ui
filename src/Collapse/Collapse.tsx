@@ -33,7 +33,7 @@ const Collapse: React.FC<Props> = (props) => {
       const childElement =
         child as React.FunctionComponentElement<CollapseItemProps>;
       return React.cloneElement(childElement, {
-        selected,
+        selected: selected,
         title: childElement.props.title,
         name: childElement.props.name,
         change: (name: string) => handleChange(name),

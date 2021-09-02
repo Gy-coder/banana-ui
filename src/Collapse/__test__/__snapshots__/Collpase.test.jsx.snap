@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试Collapse组件 renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="g-collapse"
+  >
+    <div
+      class="g-collapse-item"
+    >
+      <div
+        class="g-collapse-item-title"
+      >
+        标题一
+      </div>
+    </div>
+    <div
+      class="g-collapse-item"
+    >
+      <div
+        class="g-collapse-item-title"
+      >
+        标题二
+      </div>
+    </div>
+    <div
+      class="g-collapse-item"
+    >
+      <div
+        class="g-collapse-item-title"
+      >
+        标题三
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -9,7 +9,7 @@ const CollapseItem: React.FC<CollapseItemProps> = (props) => {
     change(props.name);
   };
   useEffect(() => {
-    if (selected.includes(props.name)) setOpen(true);
+    if (selected?.includes(props.name)) setOpen(true);
     else setOpen(false);
   }, [selected]);
   return (

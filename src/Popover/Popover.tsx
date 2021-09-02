@@ -74,22 +74,28 @@ const Popover: React.FC<Props> = (props) => {
   useEffect(() => {
     if (trigger === 'click') {
       popoverRef.current!.addEventListener('click', handleClick);
+    } else {
+      popoverRef.current!.addEventListener('mouseenter', open);
+      popoverRef.current!.addEventListener('mouseleave', close);
     }
     return () => {
       if (trigger === 'click') {
         popoverRef.current!.removeEventListener('click', handleClick);
+      } else {
+        popoverRef.current!.removeEventListener('mouseenter', open);
+        popoverRef.current!.removeEventListener('mouseleave', close);
       }
     };
   });
   return (
-    <div className='g-popover' ref={popoverRef}>
+    <div className="g-popover" ref={popoverRef}>
       <PopoverContent
         visible={visible}
         content={content}
         ref={contentRef}
         position={position}
       />
-      <span className='g-popover-trigger' ref={triggerRef}>
+      <span className="g-popover-trigger" ref={triggerRef}>
         {children}
       </span>
     </div>

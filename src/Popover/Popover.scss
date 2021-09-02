@@ -7,6 +7,7 @@ $border-radius: 4px;
   position: relative;
 }
 .g-popover-content {
+  z-index: 999;
   position: absolute;
   border: 1px solid $border-color;
   border-radius: $border-radius;

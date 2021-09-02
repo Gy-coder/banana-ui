@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试CheckBox CheckBox可以正常渲染 1`] = `
+<DocumentFragment>
+  <label
+    class="g-checkbox-wrapper"
+  >
+    <span
+      class="g-checkbox"
+    >
+      <span
+        class="g-checkbox-inner"
+      />
+      <input
+        type="checkbox"
+        value="123"
+      />
+    </span>
+    <span
+      class="g-checkbox-tips"
+    >
+      My Checkbox
+    </span>
+  </label>
+</DocumentFragment>
+`;

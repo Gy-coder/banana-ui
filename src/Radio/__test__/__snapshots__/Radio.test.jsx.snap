@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试CheckBox CheckBox可以正常渲染 1`] = `
+<DocumentFragment>
+  <label
+    class="g-radio-wrapper"
+  >
+    <span
+      class="g-radio"
+    >
+      <input
+        type="radio"
+        value="123"
+      />
+      <span
+        class="g-radio-inner"
+      />
+    </span>
+    <span
+      class="g-radio-tips"
+    >
+      My Radio
+    </span>
+  </label>
+</DocumentFragment>
+`;

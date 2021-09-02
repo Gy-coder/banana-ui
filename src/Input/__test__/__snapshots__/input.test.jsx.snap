@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试Input组件 能够正常render 1`] = `
+<DocumentFragment>
+  <div
+    class="g-input-wrapper"
+  >
+    <input
+      class="g-input"
+      value="123"
+    />
+  </div>
+</DocumentFragment>
+`;

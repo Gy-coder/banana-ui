@@ -7,6 +7,9 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   sass: {},
-  publicPath: process.env.PUBLIC_PATH ?? '/',
+  publicPath: '/banana-ui-website/',
+  history: {
+    type: 'hash',
+  },
   // more config: https://d.umijs.org/config
 });

@@ -2,6 +2,7 @@
   "private": true,
   "name": "banana-ui",
   "version": "1.0.0",
+  "homepage": "\"https://gy-coder.github.io/banana-ui-website/\",",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",

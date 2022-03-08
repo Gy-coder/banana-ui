@@ -13,6 +13,7 @@ const Image: React.FC<ImageProps> = (props) => {
     <div className={classnames}>
       <img src={src} {...rest} />
       <LightUp
+        src={src}
         visible={visible}
         setVisible={(visible) => setVisible(!visible)}
       />
@@ -21,14 +22,24 @@ const Image: React.FC<ImageProps> = (props) => {
 };
 
 interface LightUpProps {
+  src?: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }
 
 const LightUp: React.FC<LightUpProps> = (props) => {
-  const { visible, setVisible } = props;
+  const { src, visible, setVisible } = props;
   const render = () => {
-    return visible && <div>LightUp</div>;
+    return (
+      visible && (
+        <div className="banana-image-lightup-wrapper">
+          <div className="banana-image-lightup-mask" />
+          <div className="banana-image-lightup-content-wrapper">
+            <img className="banana-image-lightup-content" src={src} />
+          </div>
+        </div>
+      )
+    );
   };
   return ReactDOM.createPortal(render(), document.body);
 };

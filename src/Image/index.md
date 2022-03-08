@@ -17,4 +17,10 @@ nav:
 
 # 代码示例
 
+## 显示图片
+
 <code src="./demos/basic.tsx" />
+
+## 错误处理
+
+<code src="./demos/error.tsx" />

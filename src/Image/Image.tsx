@@ -3,22 +3,35 @@ import ReactDOM from 'react-dom';
 import classes from 'classnames';
 import './Image.scss';
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  fallback?: string;
+}
 
 const Image: React.FC<ImageProps> = (props) => {
-  const { className, src, ...rest } = props;
+  const { className, src, fallback, ...rest } = props;
   const classnames = classes('banana-image', className);
   const [visible, setVisible] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [innerSrc, setInnerSrc] = useState<string | undefined>(src);
   const showLightUp = () => {
-    setVisible(true);
+    !error && setVisible(true);
   };
   const hideLightUp = () => {
     setVisible(false);
   };
+  const hanleError = () => {
+    setError(true);
+    fallback && setInnerSrc(fallback);
+  };
   return (
     <div className={classnames}>
-      <img src={src} onClick={showLightUp} {...rest} />
-      <LightUp src={src} visible={visible} close={hideLightUp} />
+      <img
+        src={innerSrc}
+        onClick={showLightUp}
+        onError={hanleError}
+        {...rest}
+      />
+      <LightUp src={innerSrc} visible={visible} close={hideLightUp} />
     </div>
   );
 };

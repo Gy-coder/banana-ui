@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import {
+  CloseCircleOutlined,
+  RotateLeftOutlined,
+  RotateRightOutlined,
+  EyeOutlined,
+} from '@ant-design/icons';
 import classes from 'classnames';
 import './Image.scss';
 
@@ -39,21 +45,46 @@ const Image: React.FC<ImageProps> = (props) => {
 interface LightUpProps {
   src?: string;
   visible: boolean;
-  close: (visible: boolean) => void;
+  close: () => void;
 }
 
 const LightUp: React.FC<LightUpProps> = (props) => {
   const { src, visible, close } = props;
+  const [deg, setDeg] = useState<number>(0);
+  const handleTurnLeft = () => {
+    setDeg(deg - 90);
+  };
+  const handleTurnRight = () => {
+    setDeg(deg + 90);
+  };
   const handleClose = () => {
     close();
+    setDeg(0);
   };
   const render = () => {
     return (
       visible && (
         <div className="banana-image-lightup-wrapper">
           <div className="banana-image-lightup-mask" onClick={handleClose} />
+          <ul className="banana-image-option-wrapper">
+            <li className="banana-image-option-item" onClick={handleClose}>
+              <CloseCircleOutlined />
+            </li>
+            <li className="banana-image-option-item" onClick={handleTurnRight}>
+              <RotateRightOutlined />
+            </li>
+            <li className="banana-image-option-item" onClick={handleTurnLeft}>
+              <RotateLeftOutlined />
+            </li>
+          </ul>
           <div className="banana-image-lightup-content-wrapper">
-            <img className="banana-image-lightup-content" src={src} />
+            <img
+              className="banana-image-lightup-content"
+              src={src}
+              style={{
+                transform: `rotate(${deg}deg)`,
+              }}
+            />
           </div>
         </div>
       )

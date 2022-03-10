@@ -1,5 +1,4 @@
 .banana-image {
-  outline: 1px solid red;
   display: inline-flex;
   &-lightup-wrapper {
     position: fixed;
@@ -29,5 +28,32 @@
     vertical-align: middle;
     cursor: grab;
     transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  }
+  &-option-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    line-height: 1.5715;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.85);
+    list-style: none;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &-option-item {
+    margin-left: 12px;
+    padding: 12px;
+    cursor: pointer;
+    > span {
+      font-size: 24px;
+    }
   }
 }

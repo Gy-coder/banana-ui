@@ -22,11 +22,13 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 
 ### 数据录入
 
-- [Checkbox 多选框](./components/checkbox)
-- [Switch 开关](./components/switch)
-- [Input 输入框](./components/input)
-- [Radio 单选框](./components/radio)
-- [Rate 评分](./components/rate)
+- [AutoComplete 自动补全](./components/autocomplete)
+
+* [Checkbox 多选框](./components/checkbox)
+* [Switch 开关](./components/switch)
+* [Input 输入框](./components/input)
+* [Radio 单选框](./components/radio)
+* [Rate 评分](./components/rate)
 
 ### 数据展示
 

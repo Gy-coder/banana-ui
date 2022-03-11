@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import './Button.scss';
 
-interface ButtonProps
+export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   /**
    * 可以这样写属性描述

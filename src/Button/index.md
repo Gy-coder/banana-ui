@@ -55,4 +55,8 @@ nav:
 
 <code src="./demos/loading.tsx" />
 
+## 与 ButtonGroup 一起使用
+
+<code src="./demos/group.tsx" />
+
 <API src="./Button.tsx" />

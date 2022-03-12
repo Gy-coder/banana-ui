@@ -1,4 +1,6 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
+import { useDebounce } from '../hooks/useDebounce';
 import Input, { InputProps } from '../Input/Input';
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
@@ -20,13 +22,15 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     props;
   const [inputValue, setInputValue] = useState<string>(value?.toString() || '');
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim();
-    setInputValue(value);
-    if (value) {
-      const res = fetchSuggestions(value);
+  const [loading, setLoading] = useState<boolean>(false);
+  const debounceValue = useDebounce(inputValue, 500);
+  useEffect(() => {
+    if (debounceValue) {
+      const res = fetchSuggestions(debounceValue as string);
       if (res instanceof Promise) {
+        setLoading(true);
         res.then((data) => {
+          setLoading(false);
           setSuggestions(data);
         });
       } else {
@@ -35,6 +39,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     } else {
       setSuggestions([]);
     }
+  }, [debounceValue]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim();
+    setInputValue(value);
   };
   const handleSelect = (
     e: React.MouseEvent<HTMLLIElement>,
@@ -66,6 +74,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   return (
     <div className="g-auto-complete">
       <Input value={inputValue} onChange={handleChange} {...restProps} />
+      {loading && (
+        <ul>
+          <LoadingOutlined />
+        </ul>
+      )}
       {suggestions.length > 0 && generateDropDown()}
     </div>
   );

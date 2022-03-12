@@ -31,7 +31,6 @@ const Demo = () => {
       </>
     );
   };
-  console.log(handleFetch, typeof handleFetch);
   return (
     <AutoComplete
       fetchSuggestions={handleFetch}

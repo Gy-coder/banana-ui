@@ -2,7 +2,9 @@ import React, { ReactElement, useState } from 'react';
 import Input, { InputProps } from '../Input/Input';
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-  fetchSuggestions: (str: string) => DataSourceType[];
+  fetchSuggestions: (
+    str: string,
+  ) => DataSourceType[] | Promise<DataSourceObject[]>;
   onSelect?: (item: DataSourceType) => void;
   renderOption: (item: DataSourceType) => ReactElement;
 }
@@ -23,8 +25,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     setInputValue(value);
     if (value) {
       const res = fetchSuggestions(value);
-      setSuggestions(res);
-      console.log(res);
+      if (res instanceof Promise) {
+        res.then((data) => {
+          setSuggestions(data);
+        });
+      } else {
+        setSuggestions(res);
+      }
     } else {
       setSuggestions([]);
     }

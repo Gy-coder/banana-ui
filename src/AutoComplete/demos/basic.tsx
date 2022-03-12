@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import { AutoComplete } from 'banana-ui';
+import { AutoComplete, DataSourceType } from 'banana-ui';
 
 const Demo = () => {
   const strArr = [
@@ -19,12 +19,18 @@ const Demo = () => {
   ];
 
   const fetchSuggestion = (query: string) => {
-    return strArr.filter((item) => item.indexOf(query) >= 0);
+    return strArr
+      .filter((item) => item.indexOf(query) >= 0)
+      .map((item) => {
+        return { value: item };
+      });
   };
-  const onSelect = (item: string) => {
+  const onSelect = (item: DataSourceType) => {
     console.log(item);
   };
-  return <AutoComplete fetchSuggestion={fetchSuggestion} onSelect={onSelect} />;
+  return (
+    <AutoComplete fetchSuggestions={fetchSuggestion} onSelect={onSelect} />
+  );
 };
 
 export default Demo;

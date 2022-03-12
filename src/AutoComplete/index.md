@@ -26,3 +26,5 @@ nav:
 ## 基础使用
 
 <code src="./demos/basic.tsx" />
+
+<code src="./demos/renderOption.tsx" />

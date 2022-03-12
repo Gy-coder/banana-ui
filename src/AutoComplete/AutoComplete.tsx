@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import Input, { InputProps } from '../Input/Input';
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-  fetchSuggestion: (str: string) => string[];
-  onSelect?: (item: string) => void;
+  fetchSuggestions: (str: string) => DataSourceType[];
+  onSelect?: (item: DataSourceType) => void;
+  renderOption: (item: DataSourceType) => ReactElement;
 }
 
+interface DataSourceObject {
+  value: string;
+}
+
+export type DataSourceType<T = {}> = T & DataSourceObject;
+
 const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
-  const { fetchSuggestion, onSelect, value, ...restProps } = props;
+  const { fetchSuggestions, onSelect, value, renderOption, ...restProps } =
+    props;
   const [inputValue, setInputValue] = useState<string>(value?.toString() || '');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setInputValue(value);
     if (value) {
-      const res = fetchSuggestion(value);
+      const res = fetchSuggestions(value);
       setSuggestions(res);
       console.log(res);
     } else {
       setSuggestions([]);
     }
   };
-  const handleSelect = (e: React.MouseEvent<HTMLLIElement>, item: string) => {
-    setInputValue(item);
+  const handleSelect = (
+    e: React.MouseEvent<HTMLLIElement>,
+    item: DataSourceType,
+  ) => {
+    setInputValue(item.value);
     setSuggestions([]);
     onSelect && onSelect(item);
+  };
+  const renderTemplate = (item: DataSourceType) => {
+    return renderOption ? renderOption(item) : item.value;
   };
   const generateDropDown = () => {
     return (
@@ -35,7 +49,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
               key={index + Math.random()}
               onClick={(e) => handleSelect(e, item)}
             >
-              {item}
+              {renderTemplate(item)}
             </li>
           );
         })}

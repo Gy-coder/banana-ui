@@ -34,6 +34,7 @@ const Demo = () => {
   return (
     <AutoComplete
       fetchSuggestions={handleFetch}
+      width={400}
       onSelect={() => console.log('selected')}
       placeholder="输入湖人队球员英文,自定义下拉模版"
       renderOption={renderOption}

@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test AutoComplete component renderOption should generate the right template 1`] = `
+<DocumentFragment>
+  <div
+    class="g-auto-complete"
+  >
+    <div
+      class="g-input-wrapper"
+    >
+      <input
+        class="g-input"
+        placeholder="auto-completed"
+        value="a"
+      />
+    </div>
+    <ul
+      class="g-auto-complete-suggestion"
+    >
+      <li
+        class="g-auto-complete-suggestion-item"
+      >
+        <span>
+          ab - 11
+        </span>
+      </li>
+      <li
+        class="g-auto-complete-suggestion-item"
+      >
+        <span>
+          abc - 1
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`test AutoComplete component should provide keyborad support 1`] = `
+<DocumentFragment>
+  <div
+    class="g-auto-complete"
+  >
+    <div
+      class="g-input-wrapper"
+    >
+      <input
+        class="g-input"
+        placeholder="This is a placeholder"
+        value="ab"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`test AutoComplete component should render correct 1`] = `
+<DocumentFragment>
+  <div
+    class="g-auto-complete"
+  >
+    <div
+      class="g-input-wrapper"
+    >
+      <input
+        class="g-input"
+        data-testid="auto"
+        placeholder="This is a placeholder"
+        value=""
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`test AutoComplete component test basic AutoComplete behavior 1`] = `
+<DocumentFragment>
+  <div
+    class="g-auto-complete"
+  >
+    <div
+      class="g-input-wrapper"
+    >
+      <input
+        class="g-input"
+        placeholder="This is a placeholder"
+        value="a"
+      />
+    </div>
+    <ul
+      class="g-auto-complete-suggestion"
+    >
+      <li
+        class="g-auto-complete-suggestion-item"
+      >
+        ab
+      </li>
+      <li
+        class="g-auto-complete-suggestion-item"
+      >
+        abc
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`test AutoComplete component test basic AutoComplete behavior 2`] = `
+<DocumentFragment>
+  <div
+    class="g-auto-complete"
+  >
+    <div
+      class="g-input-wrapper"
+    >
+      <input
+        class="g-input"
+        placeholder="This is a placeholder"
+        value="ab"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

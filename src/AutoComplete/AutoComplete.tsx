@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { LoadingOutlined } from '@ant-design/icons';
 import Input, { InputProps } from '../Input/Input';
 import { useDebounce } from '../hooks/useDebounce';
-import { useClickOutside } from '@/hooks/useClickOutside';
+import { useClickOutside } from '../hooks/useClickOutside';
 import './AutoComplete.scss';
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
@@ -29,7 +29,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const triggerSearch = useRef<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
-  const debounceValue = useDebounce(inputValue, 500);
+  const debounceValue = useDebounce(inputValue, 200);
   useClickOutside(componentRef, () => {
     setSuggestions([]);
   });
@@ -91,7 +91,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   };
   const generateDropDown = () => {
     return (
-      <ul>
+      <ul className="g-auto-complete-suggestion">
         {suggestions.map((item, index) => {
           const classes = classnames('g-auto-complete-suggestion-item', {
             'item-highlighted': index === highlightIndex,
@@ -118,7 +118,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         {...restProps}
       />
       {loading && (
-        <ul>
+        <ul className="g-auto-complete-suggestion">
           <LoadingOutlined />
         </ul>
       )}

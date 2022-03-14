@@ -15,7 +15,7 @@ exports[`test AutoComplete component renderOption should generate the right temp
       />
     </div>
     <ul
-      class="g-auto-complete-suggestion"
+      class="g-auto-complete-suggestion zoom-in-top-enter zoom-in-top-enter-active"
     >
       <li
         class="g-auto-complete-suggestion-item"
@@ -50,6 +50,9 @@ exports[`test AutoComplete component should provide keyborad support 1`] = `
         value="ab"
       />
     </div>
+    <ul
+      class="g-auto-complete-suggestion zoom-in-top-exit zoom-in-top-exit-active"
+    />
   </div>
 </DocumentFragment>
 `;
@@ -88,7 +91,7 @@ exports[`test AutoComplete component test basic AutoComplete behavior 1`] = `
       />
     </div>
     <ul
-      class="g-auto-complete-suggestion"
+      class="g-auto-complete-suggestion zoom-in-top-enter zoom-in-top-enter-active"
     >
       <li
         class="g-auto-complete-suggestion-item"
@@ -119,6 +122,9 @@ exports[`test AutoComplete component test basic AutoComplete behavior 2`] = `
         value="ab"
       />
     </div>
+    <ul
+      class="g-auto-complete-suggestion zoom-in-top-exit zoom-in-top-exit-active"
+    />
   </div>
 </DocumentFragment>
 `;

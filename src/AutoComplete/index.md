@@ -51,6 +51,7 @@ nav:
 | ---------------- | ------------------------------------- | -------------------------------------------------------------- | -------- | ------ |
 | value            | 输入框内的值                          | string                                                         | false    |        |
 | onChange         | 当输入框内容改变时的回调函数          | (value: string) => void                                        | false    |        |
+| block            | AutoComplete 是否为块级元素           | boolean                                                        | false    | true   |
 | fetchSuggestions | 搜索补全项的时候调用                  | (str: string) => DataSourceType[] ｜ Promise<DataSourceType[]> | true     |        |
 | onSelect         | 被选中时调用，参数为选中项的 value 值 | (item: DataSourceType) => void                                 | false    |        |
 | renderOption     | 自定义渲染下拉选项                    | (item: DataSourceType) => ReactElement                         | false    |        |

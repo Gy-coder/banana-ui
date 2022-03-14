@@ -1,7 +1,14 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import classnames from 'classnames';
 import { LoadingOutlined } from '@ant-design/icons';
 import Input, { InputProps } from '../Input/Input';
+import Transition from '../Transition/Transition';
 import { useDebounce } from '../hooks/useDebounce';
 import { useClickOutside } from '../hooks/useClickOutside';
 import './AutoComplete.scss';
@@ -39,6 +46,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const triggerSearch = useRef<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
   const debounceValue = useDebounce(value, 200);
+  const showDropDown = useMemo(() => {
+    if (suggestions.length > 0) return true;
+    return false;
+  }, [suggestions.length]);
   useClickOutside(componentRef, () => {
     setSuggestions([]);
   });
@@ -50,9 +61,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         res.then((data) => {
           setLoading(false);
           setSuggestions(data);
+          if (data.length > 0) {
+          }
         });
       } else {
         setSuggestions(res);
+        if (res.length > 0) {
+        }
       }
     } else {
       setSuggestions([]);
@@ -100,22 +115,29 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   };
   const generateDropDown = () => {
     return (
-      <ul className="g-auto-complete-suggestion">
-        {suggestions.map((item, index) => {
-          const classes = classnames('g-auto-complete-suggestion-item', {
-            'item-highlighted': index === highlightIndex,
-          });
-          return (
-            <li
-              className={classes}
-              key={index + Math.random()}
-              onClick={() => handleSelect(item)}
-            >
-              {renderTemplate(item)}
-            </li>
-          );
-        })}
-      </ul>
+      <Transition
+        in={showDropDown || loading}
+        animation="zoom-in-top"
+        timeout={300}
+      >
+        <ul className="g-auto-complete-suggestion">
+          {loading && <LoadingOutlined className="g-suggesstion-icon" />}
+          {suggestions.map((item, index) => {
+            const classes = classnames('g-auto-complete-suggestion-item', {
+              'item-highlighted': index === highlightIndex,
+            });
+            return (
+              <li
+                className={classes}
+                key={index + Math.random()}
+                onClick={() => handleSelect(item)}
+              >
+                {renderTemplate(item)}
+              </li>
+            );
+          })}
+        </ul>
+      </Transition>
     );
   };
   return (
@@ -137,7 +159,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
           <LoadingOutlined className="g-suggesstion-icon" />
         </ul>
       )}
-      {suggestions.length > 0 && generateDropDown()}
+      {generateDropDown()}
     </div>
   );
 };

@@ -25,6 +25,7 @@ const Demo = () => {
         return { value: item };
       });
   };
+
   const [value, setValue] = useState('');
   const onSelect = (item: DataSourceType) => {
     console.log(item);
@@ -36,6 +37,7 @@ const Demo = () => {
     <AutoComplete
       value={value}
       onChange={onChange}
+      block={false}
       fetchSuggestions={fetchSuggestion}
       onSelect={onSelect}
     />

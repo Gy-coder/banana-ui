@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { AutoComplete, DataSourceType } from 'banana-ui';
 
@@ -31,13 +31,20 @@ const Demo = () => {
       </>
     );
   };
+  const [value, setValue] = useState('');
+  const onSelect = (item: DataSourceType) => {
+    console.log(item);
+  };
+  const onChange = (value: string) => {
+    setValue(value);
+  };
   return (
     <AutoComplete
+      value={value}
+      onChange={onChange}
+      block={false}
       fetchSuggestions={handleFetch}
-      width={400}
-      onSelect={() => console.log('selected')}
-      placeholder="输入湖人队球员英文,自定义下拉模版"
-      renderOption={renderOption}
+      onSelect={onSelect}
     />
   );
 };

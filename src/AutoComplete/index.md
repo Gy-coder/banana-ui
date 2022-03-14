@@ -27,6 +27,8 @@ nav:
 
 <code src="./demos/basic.tsx" />
 
+<code src="./demos/width.tsx" />
+
 <code src="./demos/renderOption.tsx" />
 
 <code src="./demos/async.tsx" />

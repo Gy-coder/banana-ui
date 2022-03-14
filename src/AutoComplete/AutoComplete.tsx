@@ -6,12 +6,15 @@ import { useDebounce } from '../hooks/useDebounce';
 import { useClickOutside } from '../hooks/useClickOutside';
 import './AutoComplete.scss';
 
-export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
+export interface AutoCompleteProps
+  extends Omit<InputProps, 'onSelect' | 'onChange'> {
   fetchSuggestions: (
     str: string,
   ) => DataSourceType[] | Promise<DataSourceObject[]>;
   onSelect?: (item: DataSourceType) => void;
+  onChange?: (str: string) => void;
   renderOption?: (item: DataSourceType) => ReactElement;
+  block?: boolean;
 }
 
 interface DataSourceObject {
@@ -21,15 +24,21 @@ interface DataSourceObject {
 export type DataSourceType<T = {}> = T & DataSourceObject;
 
 const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
-  const { fetchSuggestions, onSelect, value, renderOption, ...restProps } =
-    props;
-  const [inputValue, setInputValue] = useState<string>(value?.toString() || '');
+  const {
+    fetchSuggestions,
+    onSelect,
+    value,
+    onChange,
+    block,
+    renderOption,
+    ...restProps
+  } = props;
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const triggerSearch = useRef<boolean>(false);
   const componentRef = useRef<HTMLDivElement>(null);
-  const debounceValue = useDebounce(inputValue, 200);
+  const debounceValue = useDebounce(value, 200);
   useClickOutside(componentRef, () => {
     setSuggestions([]);
   });
@@ -52,11 +61,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   }, [debounceValue]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
-    setInputValue(value);
+    onChange && onChange(value);
     triggerSearch.current = true;
   };
   const handleSelect = (item: DataSourceType) => {
-    setInputValue(item.value);
+    onChange && onChange(item.value);
     setSuggestions([]);
     onSelect && onSelect(item);
     triggerSearch.current = false;
@@ -110,9 +119,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     );
   };
   return (
-    <div className="g-auto-complete" ref={componentRef}>
+    <div
+      className={classnames('g-auto-complete', {
+        block,
+      })}
+      ref={componentRef}
+    >
       <Input
-        value={inputValue}
+        value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         block
@@ -126,6 +140,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       {suggestions.length > 0 && generateDropDown()}
     </div>
   );
+};
+
+AutoComplete.defaultProps = {
+  block: true,
 };
 
 export default AutoComplete;

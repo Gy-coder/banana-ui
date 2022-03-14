@@ -3,10 +3,10 @@
 exports[`test AutoComplete component renderOption should generate the right template 1`] = `
 <DocumentFragment>
   <div
-    class="g-auto-complete"
+    class="g-auto-complete block"
   >
     <div
-      class="g-input-wrapper"
+      class="g-input-wrapper block"
     >
       <input
         class="g-input"
@@ -39,10 +39,10 @@ exports[`test AutoComplete component renderOption should generate the right temp
 exports[`test AutoComplete component should provide keyborad support 1`] = `
 <DocumentFragment>
   <div
-    class="g-auto-complete"
+    class="g-auto-complete block"
   >
     <div
-      class="g-input-wrapper"
+      class="g-input-wrapper block"
     >
       <input
         class="g-input"
@@ -57,10 +57,10 @@ exports[`test AutoComplete component should provide keyborad support 1`] = `
 exports[`test AutoComplete component should render correct 1`] = `
 <DocumentFragment>
   <div
-    class="g-auto-complete"
+    class="g-auto-complete block"
   >
     <div
-      class="g-input-wrapper"
+      class="g-input-wrapper block"
     >
       <input
         class="g-input"
@@ -76,10 +76,10 @@ exports[`test AutoComplete component should render correct 1`] = `
 exports[`test AutoComplete component test basic AutoComplete behavior 1`] = `
 <DocumentFragment>
   <div
-    class="g-auto-complete"
+    class="g-auto-complete block"
   >
     <div
-      class="g-input-wrapper"
+      class="g-input-wrapper block"
     >
       <input
         class="g-input"
@@ -108,10 +108,10 @@ exports[`test AutoComplete component test basic AutoComplete behavior 1`] = `
 exports[`test AutoComplete component test basic AutoComplete behavior 2`] = `
 <DocumentFragment>
   <div
-    class="g-auto-complete"
+    class="g-auto-complete block"
   >
     <div
-      class="g-input-wrapper"
+      class="g-input-wrapper block"
     >
       <input
         class="g-input"

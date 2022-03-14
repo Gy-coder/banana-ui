@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { AutoComplete, DataSourceType } from 'banana-ui';
 
@@ -10,6 +10,10 @@ interface GithubUserProps {
 }
 
 const Demo = () => {
+  const [value, setValue] = useState('');
+  const onChange = (value: string) => {
+    setValue(value);
+  };
   const renderOption = (item: DataSourceType) => {
     const itemWithGithub = item as DataSourceType<GithubUserProps>;
     return (
@@ -35,6 +39,8 @@ const Demo = () => {
     <div>
       <div>请输入任意 Github 用户名</div>
       <AutoComplete
+        value={value}
+        onChange={onChange}
         fetchSuggestions={handleSearch}
         renderOption={renderOption}
       />

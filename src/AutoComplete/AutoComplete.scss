@@ -1,5 +1,9 @@
 .g-auto-complete {
   position: relative;
+  display: inline-block;
+  &.block {
+    display: block;
+  }
   > ul {
     margin-top: 0;
     margin-bottom: 1rem;

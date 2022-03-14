@@ -6,7 +6,7 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import '@testing-library/jest-dom';
 import AutoComplete, {
   AutoCompleteProps,
@@ -42,9 +42,17 @@ const testProps2: AutoCompleteProps = {
 
 let wrapper: RenderResult, inputNode: HTMLInputElement;
 
+const Demo: React.FC<AutoCompleteProps> = (props) => {
+  const [value, setValue] = useState('');
+  const onChange = (value: string) => {
+    setValue(value);
+  };
+  return <AutoComplete value={value} onChange={onChange} {...props} />;
+};
+
 describe('test AutoComplete component', () => {
   beforeEach(() => {
-    wrapper = render(<AutoComplete {...testProps} />);
+    wrapper = render(<Demo {...testProps} />);
     inputNode = wrapper.getByPlaceholderText(
       'This is a placeholder',
     ) as HTMLInputElement;
@@ -114,7 +122,7 @@ describe('test AutoComplete component', () => {
   });
   it('renderOption should generate the right template', async () => {
     cleanup();
-    wrapper = render(<AutoComplete {...testProps2} />);
+    wrapper = render(<Demo {...testProps2} />);
     inputNode = wrapper.getByPlaceholderText(
       'auto-completed',
     ) as HTMLInputElement;

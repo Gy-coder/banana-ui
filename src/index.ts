@@ -23,3 +23,4 @@ export { default as CheckboxGroup } from './Checkbox/CheckboxGroup';
 export { default as Popover } from './Popover/Popover';
 export { default as Image } from './Image/Image';
 export { default as AutoComplete } from './AutoComplete/AutoComplete';
+export { default as Affix } from './Affix/Affix';

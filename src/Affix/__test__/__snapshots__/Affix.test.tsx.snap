@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test affix Affix shoule render correct 1`] = `
+<DocumentFragment>
+  <div
+    class="g-affix"
+  >
+    <div
+      class="g-affix-wrapper"
+    >
+      <div>
+        Affix
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

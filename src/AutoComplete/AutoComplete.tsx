@@ -134,7 +134,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       />
       {loading && (
         <ul className="g-auto-complete-suggestion">
-          <LoadingOutlined />
+          <LoadingOutlined className="g-suggesstion-icon" />
         </ul>
       )}
       {suggestions.length > 0 && generateDropDown()}

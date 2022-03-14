@@ -115,6 +115,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        block
         {...restProps}
       />
       {loading && (

@@ -18,6 +18,7 @@ $red: #fa415d;
     border-radius: $border-radius;
     padding: 0 8px;
     outline: none;
+    width: 100%;
     &:hover {
       border-color: $border-hover-color;
     }
@@ -33,6 +34,9 @@ $red: #fa415d;
     &.error {
       border-color: $red;
     }
+  }
+  &.block {
+    display: flex;
   }
   .error-message {
     color: $red;

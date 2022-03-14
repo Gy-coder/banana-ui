@@ -27,8 +27,30 @@ nav:
 
 <code src="./demos/basic.tsx" />
 
+## 非块级用法
+
 <code src="./demos/width.tsx" />
+
+## 自定义渲染
 
 <code src="./demos/renderOption.tsx" />
 
+## 支持异步获取
+
 <code src="./demos/async.tsx" />
+
+## 参数类型
+
+| 类型           | 值                                                 |
+| -------------- | -------------------------------------------------- |
+| DataSourceType | type DataSourceType<T = {}> = T & DataSourceObject |
+
+## API
+
+| 参数             | 说明                                  | 类型                                                           | 是否必须 | 默认值 |
+| ---------------- | ------------------------------------- | -------------------------------------------------------------- | -------- | ------ |
+| value            | 输入框内的值                          | string                                                         | false    |        |
+| onChange         | 当输入框内容改变时的回调函数          | (value: string) => void                                        | false    |        |
+| fetchSuggestions | 搜索补全项的时候调用                  | (str: string) => DataSourceType[] ｜ Promise<DataSourceType[]> | true     |        |
+| onSelect         | 被选中时调用，参数为选中项的 value 值 | (item: DataSourceType) => void                                 | false    |        |
+| renderOption     | 自定义渲染下拉选项                    | (item: DataSourceType) => ReactElement                         | false    |        |

@@ -42,9 +42,9 @@ const Demo = () => {
     <AutoComplete
       value={value}
       onChange={onChange}
-      block={false}
       fetchSuggestions={handleFetch}
       onSelect={onSelect}
+      renderOption={renderOption}
     />
   );
 };

@@ -10,7 +10,7 @@ export interface AutoCompleteProps
   extends Omit<InputProps, 'onSelect' | 'onChange'> {
   fetchSuggestions: (
     str: string,
-  ) => DataSourceType[] | Promise<DataSourceObject[]>;
+  ) => DataSourceType[] | Promise<DataSourceType[]>;
   onSelect?: (item: DataSourceType) => void;
   onChange?: (str: string) => void;
   renderOption?: (item: DataSourceType) => ReactElement;

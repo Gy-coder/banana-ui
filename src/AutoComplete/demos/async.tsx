@@ -41,6 +41,7 @@ const Demo = () => {
       <AutoComplete
         value={value}
         onChange={onChange}
+        placeholder="请输入任意 Github 用户名"
         fetchSuggestions={handleSearch}
         renderOption={renderOption}
       />

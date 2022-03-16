@@ -61,4 +61,24 @@
       transition: all .25s;
     }
   }
+  &-dropdown{
+    border: 1px solid red;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;    white-space: nowrap;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%), 0 0 6px 0 rgb(0 0 0 / 4%);
+    z-index: 100;
+  }
+  &-dropdown-item{
+    padding: 0.5rem 1rem;
+    color: #212529;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
 }

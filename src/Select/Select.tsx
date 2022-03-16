@@ -26,6 +26,11 @@ const Select: React.FC<SelectProps> = () => {
           <DownOutlined />
         </span>
       </div>
+      <ul className="g-select-dropdown">
+        <li className="g-select-dropdown-item">d</li>
+        <li className="g-select-dropdown-item">dd</li>
+        <li className="g-select-dropdown-item">ddd</li>
+      </ul>
     </div>
   );
 };

@@ -6,9 +6,9 @@ import React, {
 } from 'react';
 import classnames from 'classnames';
 import { DownOutlined } from '@ant-design/icons';
-import Transition from '@/Transition/Transition';
-import Option, { OptionProps } from '@/Select/Option';
-import { useClickOutside } from '@/hooks/useClickOutside';
+import Transition from '../Transition/Transition';
+import Option, { OptionProps } from '../Select/Option';
+import { useClickOutside } from '../hooks/useClickOutside';
 import './Select.scss';
 
 export interface SelectProps {

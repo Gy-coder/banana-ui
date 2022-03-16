@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //@ts-ignore
 import { Select, Option } from 'banana-ui';
 
@@ -6,8 +6,10 @@ const Demo = () => {
   const [value, setValue] = useState<string>('');
   const handleChange = (newValue: string) => {
     setValue(newValue);
-    console.log(value);
   };
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
   return (
     <div style={{ padding: 20 }}>
       <p>你选中的value为: {value}</p>

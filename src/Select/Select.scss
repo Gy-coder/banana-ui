@@ -11,10 +11,14 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+  border: 1px solid #d9d9d9;
+
+  &:hover{
+    border: 1px solid #1890ff;
+  }
   &-selector {
     position: relative;
     background-color: #fff;
-    border: 1px solid #d9d9d9;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
@@ -52,30 +56,31 @@
     line-height: 1;
     text-align: center;
     pointer-events: none;
-    &.isOpen{
+    &.isOpen {
       transform: rotate(180deg);
-      transition: all .25s;
+      transition: all 0.25s;
     }
-    &.isClose{
+    &.isClose {
       transform: rotate(0deg);
-      transition: all .25s;
+      transition: all 0.25s;
     }
   }
-  &-dropdown{
+  &-dropdown {
     border: 1px solid red;
     margin: 0;
     padding: 0;
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    width: 100%;    white-space: nowrap;
+    width: 100%;
+    white-space: nowrap;
     list-style: none;
     background: #fff;
     border: 1px solid #dee2e6;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 12%), 0 0 6px 0 rgb(0 0 0 / 4%);
     z-index: 100;
   }
-  &-dropdown-item{
+  &-dropdown-item {
     padding: 0.5rem 1rem;
     color: #212529;
     cursor: pointer;

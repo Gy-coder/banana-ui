@@ -1,0 +1,64 @@
+.g-select {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  &-selector {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  &-search {
+    > input {
+      height: 30px;
+      opacity: 0;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+  }
+  &-item {
+    padding-right: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 11px;
+    user-select: none;
+  }
+  &-arrow {
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    display: flex;
+    align-items: center;
+    height: 12px;
+    margin-top: -6px;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    pointer-events: none;
+    &.isOpen{
+      transform: rotate(180deg);
+      transition: all .25s;
+    }
+    &.isClose{
+      transform: rotate(0deg);
+      transition: all .25s;
+    }
+  }
+}

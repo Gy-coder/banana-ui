@@ -15,7 +15,7 @@ const Demo = () => {
   return (
     <div style={{ padding: 20 }}>
       <p>你选中的value为: {value}</p>
-      <Select value={value} onChange={handleChange}>
+      <Select value={value} onChange={handleChange} disable>
         <Option value="jack" />
         <Option value="lucy" />
         <Option value="Yiminghe" />

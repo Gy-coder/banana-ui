@@ -12,9 +12,21 @@
   display: inline-block;
   cursor: pointer;
   border: 1px solid #d9d9d9;
-
   &:hover {
     border: 1px solid #1890ff;
+  }
+  &.disable{
+    cursor: not-allowed;
+    &:hover{
+      border: 1px solid #d9d9d9;
+    }
+    > .g-select-selector{
+      color: #00000040;
+      background: #f5f5f5;
+    }
+    input{
+      cursor: not-allowed;
+    }
   }
   &-selector {
     position: relative;

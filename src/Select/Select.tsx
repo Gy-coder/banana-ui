@@ -20,12 +20,13 @@ export interface SelectProps {
   onChange: (value: string) => void;
   className?: string;
   style?: CSSProperties;
+  disable?: boolean;
 }
 
 const SelectComponent: React.FC<SelectProps> = (props) => {
-  const { children, value, onChange, className, style } = props;
+  const { children, value, onChange, className, style, disable } = props;
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [highlightIndex, setHightIndex] = useState<number>(-1);
+  const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const length = (children as Array<ReactNode>).length;
   const componentRef = useRef<HTMLDivElement>(null);
   const selectContext: SelectContextProps = {
@@ -33,15 +34,15 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     hightlightIndex: highlightIndex,
   };
   const handleClickSelector = () => {
+    if (disable) return;
     setShowDropDown(!showDropDown);
   };
-  const handleClick = (newValue: string) => {
+  const handleSelect = (newValue: string) => {
     onChange && onChange(newValue);
     setShowDropDown(false);
   };
-
   const handleMouseMove = (index: number) => {
-    setHightIndex(index);
+    setHighlightIndex(index);
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -51,16 +52,17 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         break;
       case 'ArrowDown':
         const idxDown = (highlightIndex + 1) % length;
-        setHightIndex(idxDown);
+        setHighlightIndex(idxDown);
         break;
       case 'ArrowUp':
         const idxUp = (highlightIndex - 1 + length) % length;
-        setHightIndex(idxUp);
+        setHighlightIndex(idxUp);
         break;
       case 'Enter':
         const val = (children as Array<ReactElement>)[highlightIndex].props
           .value;
-        handleClick(val);
+        handleSelect(val);
+        break;
     }
   };
   useClickOutside(componentRef, () => {
@@ -78,7 +80,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
                 throw new Error('Select的子元素必须是Option');
               }
               return React.cloneElement(childElement, {
-                onClick: handleClick,
+                onClick: handleSelect,
                 onHover: handleMouseMove,
                 index,
               });
@@ -91,7 +93,9 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
 
   return (
     <div
-      className={classnames('g-select', className)}
+      className={classnames('g-select', className, {
+        disable,
+      })}
       ref={componentRef}
       style={style}
     >
@@ -120,5 +124,9 @@ export type SelectType = FC<SelectProps> & {
 
 const Select = SelectComponent as SelectType;
 Select.Option = Option;
+
+Select.defaultProps = {
+  disable: false,
+};
 
 export default Select;

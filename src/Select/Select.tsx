@@ -2,6 +2,8 @@ import React, {
   CSSProperties,
   FC,
   FunctionComponentElement,
+  ReactElement,
+  ReactNode,
   useRef,
   useState,
 } from 'react';
@@ -24,6 +26,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const { children, value, onChange, className, style } = props;
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [highlightIndex, setHightIndex] = useState<number>(-1);
+  const length = (children as Array<ReactNode>).length;
   const componentRef = useRef<HTMLDivElement>(null);
   const selectContext: SelectContextProps = {
     selectedValue: value,
@@ -36,8 +39,29 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     onChange && onChange(newValue);
     setShowDropDown(false);
   };
-  const handleMouseEnter = (index: number) => {
+
+  const handleMouseMove = (index: number) => {
     setHightIndex(index);
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    switch (e.key) {
+      case 'Escape':
+        setShowDropDown(false);
+        break;
+      case 'ArrowDown':
+        const idxDown = (highlightIndex + 1) % length;
+        setHightIndex(idxDown);
+        break;
+      case 'ArrowUp':
+        const idxUp = (highlightIndex - 1 + length) % length;
+        setHightIndex(idxUp);
+        break;
+      case 'Enter':
+        const val = (children as Array<ReactElement>)[highlightIndex].props
+          .value;
+        handleClick(val);
+    }
   };
   useClickOutside(componentRef, () => {
     setShowDropDown(false);
@@ -55,7 +79,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
               }
               return React.cloneElement(childElement, {
                 onClick: handleClick,
-                onHover: handleMouseEnter,
+                onHover: handleMouseMove,
                 index,
               });
             })}
@@ -73,7 +97,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     >
       <div className="g-select-selector" onClick={handleClickSelector}>
         <span className="g-select-search">
-          <input type="search" readOnly />
+          <input type="search" readOnly onKeyDown={handleKeyDown} />
         </span>
         <span className="g-select-item">{value}</span>
         <span

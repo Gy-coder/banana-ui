@@ -31,7 +31,7 @@ const Option: React.FC<OptionProps> = (props) => {
         isHover,
       })}
       onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseEnter}
     >
       {value}
     </li>

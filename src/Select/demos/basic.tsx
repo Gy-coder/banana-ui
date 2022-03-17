@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 //@ts-ignore
-import { Select, Option } from 'banana-ui';
+import { Select } from 'banana-ui';
+
+const Option = Select.Option;
 
 const Demo = () => {
   const [value, setValue] = useState<string>('');

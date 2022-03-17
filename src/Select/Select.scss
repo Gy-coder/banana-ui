@@ -85,5 +85,13 @@
     color: #212529;
     cursor: pointer;
     transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    &:hover {
+      background: #f5f5f5;
+    }
+    &.isSelected {
+      color: #000000d9;
+      font-weight: 600;
+      background-color: #e6f7ff;
+    }
   }
 }

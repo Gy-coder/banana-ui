@@ -25,4 +25,3 @@ export { default as Image } from './Image/Image';
 export { default as AutoComplete } from './AutoComplete/AutoComplete';
 export { default as Affix } from './Affix/Affix';
 export { default as Select } from './Select/Select';
-export { default as Option } from './Select/Option';

@@ -1,7 +1,11 @@
 import { createContext } from 'react';
 
 export interface SelectContextProps {
-  selectedValue?: string;
+  selectedValue: string;
+  hightlightIndex: number;
 }
 
-export const SelectedContext = createContext<SelectContextProps>({});
+export const SelectedContext = createContext<SelectContextProps>({
+  selectedValue: '',
+  hightlightIndex: -1,
+});

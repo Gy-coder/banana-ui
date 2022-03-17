@@ -10,7 +10,7 @@ import { DownOutlined } from '@ant-design/icons';
 import Transition from '../Transition/Transition';
 import Option, { OptionProps } from '../Select/Option';
 import { useClickOutside } from '../hooks/useClickOutside';
-import { SelectedContext } from './SelectedContext';
+import { SelectContextProps, SelectedContext } from './SelectedContext';
 import './Select.scss';
 
 export interface SelectProps {
@@ -23,7 +23,12 @@ export interface SelectProps {
 const SelectComponent: React.FC<SelectProps> = (props) => {
   const { children, value, onChange, className, style } = props;
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const [highlightIndex, setHightIndex] = useState<number>(-1);
   const componentRef = useRef<HTMLDivElement>(null);
+  const selectContext: SelectContextProps = {
+    selectedValue: value,
+    hightlightIndex: highlightIndex,
+  };
   const handleClickSelector = () => {
     setShowDropDown(!showDropDown);
   };
@@ -31,15 +36,18 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     onChange && onChange(newValue);
     setShowDropDown(false);
   };
+  const handleMouseEnter = (index: number) => {
+    setHightIndex(index);
+  };
   useClickOutside(componentRef, () => {
     setShowDropDown(false);
   });
   const generateDropDown = () => {
     return (
       <Transition in={showDropDown} timeout={300} animation="zoom-in-top">
-        <SelectedContext.Provider value={{ selectedValue: value }}>
+        <SelectedContext.Provider value={selectContext}>
           <ul className="g-select-dropdown">
-            {React.Children.map(children, (child) => {
+            {React.Children.map(children, (child, index) => {
               const childElement =
                 child as FunctionComponentElement<OptionProps>;
               if (childElement.type !== Option) {
@@ -47,6 +55,8 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
               }
               return React.cloneElement(childElement, {
                 onClick: handleClick,
+                onHover: handleMouseEnter,
+                index,
               });
             })}
           </ul>

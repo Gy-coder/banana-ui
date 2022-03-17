@@ -85,7 +85,7 @@
     color: #212529;
     cursor: pointer;
     transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    &:hover {
+    &.isHover {
       background: #f5f5f5;
     }
     &.isSelected {

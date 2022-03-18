@@ -16,15 +16,17 @@ import { SelectContextProps, SelectedContext } from './SelectedContext';
 import './Select.scss';
 
 export interface SelectProps {
-  value: string;
-  onChange: (value: string) => void;
   className?: string;
   style?: CSSProperties;
-  disable?: boolean;
+  disabled?: boolean;
+  value: string | string[];
+  onChange: (newValue: string | string[]) => void;
+  multiple?: boolean;
 }
 
 const SelectComponent: React.FC<SelectProps> = (props) => {
-  const { children, value, onChange, className, style, disable } = props;
+  const { children, value, onChange, className, style, disabled, multiple } =
+    props;
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const length = (children as Array<ReactNode>).length;
@@ -34,33 +36,56 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     hightlightIndex: highlightIndex,
   };
   const handleClickSelector = () => {
-    if (disable) return;
+    if (disabled) return;
     setShowDropDown(!showDropDown);
   };
   const handleSelect = (newValue: string) => {
-    onChange && onChange(newValue);
+    if (multiple) {
+      const copyValue: string[] = JSON.parse(JSON.stringify(value));
+      const idx = copyValue.indexOf(newValue);
+      if (idx >= 0) {
+        copyValue.splice(idx, 1);
+      } else {
+        copyValue.push(newValue);
+      }
+      onChange && onChange(copyValue);
+    } else {
+      onChange && onChange(newValue);
+    }
     setShowDropDown(false);
   };
+
   const handleMouseMove = (index: number) => {
     setHighlightIndex(index);
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const childrenArray = children as Array<ReactElement>;
     e.preventDefault();
     switch (e.key) {
       case 'Escape':
         setShowDropDown(false);
         break;
       case 'ArrowDown':
-        const idxDown = (highlightIndex + 1) % length;
+        let idxDown = (highlightIndex + 1) % length;
+        while (childrenArray[idxDown].props.disabled) {
+          idxDown = (idxDown + 1) % length;
+        }
         setHighlightIndex(idxDown);
         break;
       case 'ArrowUp':
-        const idxUp = (highlightIndex - 1 + length) % length;
+        let idxUp = (highlightIndex - 1 + length) % length;
+        while (childrenArray[idxUp].props.disabled) {
+          idxUp = (idxUp - 1 + length) % length;
+        }
         setHighlightIndex(idxUp);
         break;
       case 'Enter':
-        const val = (children as Array<ReactElement>)[highlightIndex].props
-          .value;
+        if (!showDropDown) {
+          setShowDropDown(true);
+          return;
+        }
+        if (highlightIndex === -1) return;
+        const val = childrenArray[highlightIndex].props.value;
         handleSelect(val);
         break;
     }
@@ -94,7 +119,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   return (
     <div
       className={classnames('g-select', className, {
-        disable,
+        disabled,
       })}
       ref={componentRef}
       style={style}
@@ -103,7 +128,13 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         <span className="g-select-search">
           <input type="search" readOnly onKeyDown={handleKeyDown} />
         </span>
-        <span className="g-select-item">{value}</span>
+        <span className="g-select-item">
+          {multiple
+            ? (value as string[]).map((v) => {
+                return <span key={v + Math.random()}>{v}</span>;
+              })
+            : value}
+        </span>
         <span
           className={classnames('g-select-arrow', {
             isOpen: showDropDown,
@@ -126,7 +157,8 @@ const Select = SelectComponent as SelectType;
 Select.Option = Option;
 
 Select.defaultProps = {
-  disable: false,
+  disabled: false,
+  multiple: false,
 };
 
 export default Select;

@@ -7,15 +7,18 @@ export interface OptionProps {
   onClick?: (value: string) => void;
   onHover?: (index: number) => void;
   index: number;
+  disabled?: boolean;
 }
 
 const Option: React.FC<OptionProps> = (props) => {
-  const { value, onClick, onHover, index } = props;
+  const { value, onClick, onHover, index, disabled } = props;
   const { selectedValue, hightlightIndex } = useContext(SelectedContext);
   const handleClick = () => {
+    if (disabled) return;
     onClick && onClick(value);
   };
   const handleMouseEnter = () => {
+    if (disabled) return;
     onHover && onHover(index);
   };
   const isSelected = useMemo(() => {
@@ -29,6 +32,7 @@ const Option: React.FC<OptionProps> = (props) => {
       className={classnames('g-select-dropdown-item', {
         isSelected,
         isHover,
+        disabled,
       })}
       onClick={handleClick}
       onMouseMove={handleMouseEnter}
@@ -36,6 +40,10 @@ const Option: React.FC<OptionProps> = (props) => {
       {value}
     </li>
   );
+};
+
+Option.defaultProps = {
+  disabled: false,
 };
 
 export default Option;

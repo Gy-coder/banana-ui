@@ -21,6 +21,10 @@ nav:
 
 <code src="./demos/basic.tsx" />
 
+<code src="./demos/disabled.tsx" />
+
+<code src="./demos/multiple.tsx" />
+
 ## API
 
 | 参数      | 说明                             | 类型                | 是否必须 | 默认值 |

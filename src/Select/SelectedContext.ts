@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 export interface SelectContextProps {
-  selectedValue: string;
+  selectedValue: string | string[];
   hightlightIndex: number;
 }
 

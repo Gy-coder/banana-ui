@@ -12,7 +12,8 @@ export interface OptionProps {
 
 const Option: React.FC<OptionProps> = (props) => {
   const { value, onClick, onHover, index, disabled } = props;
-  const { selectedValue, hightlightIndex } = useContext(SelectedContext);
+  const { selectedValue, hightlightIndex, multiple } =
+    useContext(SelectedContext);
   const handleClick = () => {
     if (disabled) return;
     onClick && onClick(value);
@@ -22,6 +23,7 @@ const Option: React.FC<OptionProps> = (props) => {
     onHover && onHover(index);
   };
   const isSelected = useMemo(() => {
+    if (multiple) return selectedValue.includes(value);
     return selectedValue === value;
   }, [selectedValue]);
   const isHover = useMemo(() => {

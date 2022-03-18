@@ -34,6 +34,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,
+    multiple: multiple || false,
   };
   const handleClickSelector = () => {
     if (disabled) return;

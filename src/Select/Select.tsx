@@ -33,9 +33,6 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const length = (children as Array<ReactNode>).length;
   const componentRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
-  useEffect(() => {
-    if (showDropDown) dropdownRef.current?.scrollTo(0, 40);
-  }, [showDropDown]);
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,

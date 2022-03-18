@@ -3,7 +3,17 @@ import React from 'react';
 import { Tag } from 'banana-ui';
 
 const Demo = () => {
-  return <Tag />;
+  const onClose = () => {
+    console.log('close');
+  };
+  return (
+    <>
+      <Tag>Tag</Tag>
+      <Tag closeable onClose={onClose}>
+        closeable
+      </Tag>
+    </>
+  );
 };
 
 export default Demo;

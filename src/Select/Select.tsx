@@ -4,6 +4,7 @@ import React, {
   FunctionComponentElement,
   ReactElement,
   ReactNode,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -31,6 +32,10 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const length = (children as Array<ReactNode>).length;
   const componentRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null);
+  useEffect(() => {
+    if (showDropDown) dropdownRef.current?.scrollTo(0, 40);
+  }, [showDropDown]);
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,
@@ -52,8 +57,8 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
       onChange && onChange(copyValue);
     } else {
       onChange && onChange(newValue);
+      setShowDropDown(false);
     }
-    setShowDropDown(false);
   };
 
   const handleMouseMove = (index: number) => {
@@ -85,7 +90,10 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
           setShowDropDown(true);
           return;
         }
-        if (highlightIndex === -1) return;
+        if (highlightIndex === -1) {
+          setShowDropDown(false);
+          return;
+        }
         const val = childrenArray[highlightIndex].props.value;
         handleSelect(val);
         break;
@@ -98,7 +106,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     return (
       <Transition in={showDropDown} timeout={300} animation="zoom-in-top">
         <SelectedContext.Provider value={selectContext}>
-          <ul className="g-select-dropdown">
+          <ul className="g-select-dropdown" ref={dropdownRef}>
             {React.Children.map(children, (child, index) => {
               const childElement =
                 child as FunctionComponentElement<OptionProps>;
@@ -106,6 +114,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
                 throw new Error('Select的子元素必须是Option');
               }
               return React.cloneElement(childElement, {
+                key: index + Math.random(),
                 onClick: handleSelect,
                 onHover: handleMouseMove,
                 index,

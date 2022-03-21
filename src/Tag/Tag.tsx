@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import classnames from 'classnames';
 import { CloseOutlined } from '@ant-design/icons';
 import './Tag.scss';

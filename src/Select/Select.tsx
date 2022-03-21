@@ -35,6 +35,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const componentRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const highlightRef = useRef<HTMLLIElement>(null);
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,
@@ -66,6 +67,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const childrenArray = children as Array<ReactElement>;
     e.preventDefault();
+
     switch (e.key) {
       case 'Escape':
         setShowDropDown(false);
@@ -76,6 +78,18 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
           idxDown = (idxDown + 1) % length;
         }
         setHighlightIndex(idxDown);
+        setTimeout(() => {
+          const { height: ulHeight, top: ulTop } =
+            dropdownRef.current!.getBoundingClientRect();
+          const { top, height } = document
+            .querySelector('.g-select-dropdown-item.isHover')!
+            .getBoundingClientRect();
+          if (top > ulTop + ulHeight - height) {
+            dropdownRef.current!.scrollBy({ top: height, behavior: 'smooth' });
+          } else if (top < ulTop) {
+            dropdownRef.current!.scrollTo({ top: 0 });
+          }
+        });
         break;
       case 'ArrowUp':
         let idxUp = (highlightIndex - 1 + length) % length;
@@ -83,6 +97,18 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
           idxUp = (idxUp - 1 + length) % length;
         }
         setHighlightIndex(idxUp);
+        setTimeout(() => {
+          const { height: ulHeight, top: ulTop } =
+            dropdownRef.current!.getBoundingClientRect();
+          const { top, height } = document
+            .querySelector('.g-select-dropdown-item.isHover')!
+            .getBoundingClientRect();
+          if (top < ulTop + height) {
+            dropdownRef.current!.scrollBy({ top: -height, behavior: 'smooth' });
+          } else if (top >= ulTop + ulHeight) {
+            dropdownRef.current!.scrollBy({ top: length * height });
+          }
+        });
         break;
       case 'Enter':
         if (!showDropDown) {
@@ -137,70 +163,63 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   };
 
   return (
-    <>
+    <div
+      className={classnames('g-select', className, {
+        disabled,
+      })}
+      ref={componentRef}
+      style={style}
+    >
       <div
-        style={{ position: 'fixed', top: 10, left: 10, width: 20, height: 20 }}
-      >
-        show: {showDropDown.toString()}
-      </div>
-      <div
-        className={classnames('g-select', className, {
-          disabled,
+        className={classnames('g-select-selector', {
+          multiple,
         })}
-        ref={componentRef}
-        style={style}
+        onClick={handleClickSelector}
       >
-        <div
-          className={classnames('g-select-selector', {
-            multiple,
-          })}
-          onClick={handleClickSelector}
-        >
-          {multiple ? (
-            <>
-              <div className="g-select-mutiple">
-                {(value as string[]).map((v) => {
-                  return (
-                    <Tag key={v} closeable onClose={() => handleClickTag(v)}>
-                      {v}
-                    </Tag>
-                  );
-                })}
-                <div className="g-select-search">
-                  <input
-                    ref={inputRef}
-                    type="search"
-                    readOnly
-                    onKeyDown={handleKeyDown}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <span className="g-select-item">{value}</span>
-              <span className="g-select-search">
+        {multiple ? (
+          <>
+            <div className="g-select-mutiple">
+              {(value as string[]).map((v) => {
+                return (
+                  <Tag key={v} closeable onClose={() => handleClickTag(v)}>
+                    {v}
+                  </Tag>
+                );
+              })}
+              <div className="g-select-search">
                 <input
                   ref={inputRef}
                   type="search"
                   readOnly
                   onKeyDown={handleKeyDown}
                 />
-              </span>
-            </>
-          )}
-        </div>
-        <span
-          className={classnames('g-select-arrow', {
-            isOpen: showDropDown,
-            isClose: !showDropDown,
-          })}
-        >
-          <DownOutlined />
-        </span>
-        {generateDropDown()}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <span className="g-select-item">{value}</span>
+            <span className="g-select-search">
+              <input
+                ref={inputRef}
+                type="search"
+                readOnly
+                onKeyDown={handleKeyDown}
+              />
+            </span>
+          </>
+        )}
       </div>
-    </>
+      <span
+        className={classnames('g-select-arrow', {
+          isOpen: showDropDown,
+          isClose: !showDropDown,
+        })}
+      >
+        <DownOutlined />
+      </span>
+      {generateDropDown()}
+    </div>
   );
 };
 

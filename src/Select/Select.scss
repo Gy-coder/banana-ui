@@ -20,8 +20,25 @@
     background-color: #fff;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    display: flex;
+    padding-right: 24px;
+    &.multiple {
+      display: flex;
+      flex: auto;
+      flex-wrap: wrap;
+      max-width: 100%;
+      padding: 1px 4px;
+      margin-right: 24px;
+      .g-tag {
+        margin: 2px;
+      }
+      input {
+        width: 4px;
+      }
+    }
   }
   &-search {
+    display: inline-block;
     > input {
       height: 30px;
       opacity: 0;
@@ -32,6 +49,7 @@
       outline: none;
       appearance: none;
       cursor: pointer;
+      width: 100%;
     }
   }
   &-item {
@@ -65,7 +83,6 @@
     }
   }
   &-dropdown {
-    border: 1px solid red;
     margin: 0;
     padding: 0;
     position: absolute;

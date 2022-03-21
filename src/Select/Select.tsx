@@ -12,6 +12,7 @@ import classnames from 'classnames';
 import { DownOutlined } from '@ant-design/icons';
 import Transition from '../Transition/Transition';
 import Option, { OptionProps } from '../Select/Option';
+import Tag from '../Tag/Tag';
 import { useClickOutside } from '../hooks/useClickOutside';
 import { SelectContextProps, SelectedContext } from './SelectedContext';
 import './Select.scss';
@@ -33,6 +34,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const length = (children as Array<ReactNode>).length;
   const componentRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,
@@ -96,8 +98,19 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         break;
     }
   };
+  const handleClickTag = (deleteValue: string) => {
+    const valueCopy: string[] = JSON.parse(JSON.stringify(value));
+    const idx = valueCopy.indexOf(deleteValue);
+    if (idx !== -1) valueCopy.splice(idx, 1);
+    onChange && onChange(valueCopy);
+  };
   useClickOutside(componentRef, () => {
     setShowDropDown(false);
+  });
+  useEffect(() => {
+    if (showDropDown) {
+      inputRef.current!.focus();
+    }
   });
   const generateDropDown = () => {
     return (
@@ -124,24 +137,59 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   };
 
   return (
-    <div
-      className={classnames('g-select', className, {
-        disabled,
-      })}
-      ref={componentRef}
-      style={style}
-    >
-      <div className="g-select-selector" onClick={handleClickSelector}>
-        <span className="g-select-search">
-          <input type="search" readOnly onKeyDown={handleKeyDown} />
-        </span>
-        <span className="g-select-item">
-          {multiple
-            ? (value as string[]).map((v) => {
-                return <span key={v + Math.random()}>{v}</span>;
-              })
-            : value}
-        </span>
+    <>
+      <div
+        style={{ position: 'fixed', top: 10, left: 10, width: 20, height: 20 }}
+      >
+        show: {showDropDown.toString()}
+      </div>
+      <div
+        className={classnames('g-select', className, {
+          disabled,
+        })}
+        ref={componentRef}
+        style={style}
+      >
+        <div
+          className={classnames('g-select-selector', {
+            multiple,
+          })}
+          onClick={handleClickSelector}
+        >
+          {multiple ? (
+            <>
+              <div className="g-select-mutiple">
+                {(value as string[]).map((v) => {
+                  return (
+                    <Tag key={v} closeable onClose={() => handleClickTag(v)}>
+                      {v}
+                    </Tag>
+                  );
+                })}
+                <div className="g-select-search">
+                  <input
+                    ref={inputRef}
+                    type="search"
+                    readOnly
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="g-select-item">{value}</span>
+              <span className="g-select-search">
+                <input
+                  ref={inputRef}
+                  type="search"
+                  readOnly
+                  onKeyDown={handleKeyDown}
+                />
+              </span>
+            </>
+          )}
+        </div>
         <span
           className={classnames('g-select-arrow', {
             isOpen: showDropDown,
@@ -150,9 +198,9 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         >
           <DownOutlined />
         </span>
+        {generateDropDown()}
       </div>
-      {generateDropDown()}
-    </div>
+    </>
   );
 };
 

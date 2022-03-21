@@ -1,7 +1,7 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useLayoutEffect } from 'react';
 
 function useClickOutside(ref: RefObject<HTMLElement>, handler: Function) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const listener = (e: MouseEvent) => {
       if (!ref.current || ref.current.contains(e.target as HTMLElement)) {
         return;
@@ -13,7 +13,7 @@ function useClickOutside(ref: RefObject<HTMLElement>, handler: Function) {
     return () => {
       document.removeEventListener('click', listener);
     };
-  });
+  }, [ref, handler]);
 }
 
 export { useClickOutside };

@@ -35,7 +35,6 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
   const componentRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const highlightRef = useRef<HTMLLIElement>(null);
   const selectContext: SelectContextProps = {
     selectedValue: value,
     hightlightIndex: highlightIndex,

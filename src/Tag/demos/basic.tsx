@@ -12,6 +12,12 @@ const Demo = () => {
       <Tag closeable onClose={onClose}>
         closeable
       </Tag>
+      <Tag color="pink">pink</Tag>
+      <Tag color="black">black</Tag>
+      <Tag color="lightgreen">lightgreen</Tag>
+      <Tag closeable onClose={onClose} color="#f60">
+        closeable
+      </Tag>
     </>
   );
 };

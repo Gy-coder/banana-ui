@@ -8,11 +8,12 @@ export interface TagProps {
   closeable?: boolean;
   onClose?: (e?: React.MouseEvent) => void;
   className?: string;
+  color?: string;
   style?: CSSProperties;
 }
 
 const Tag: React.FC<TagProps> = (props) => {
-  const { className, children, closeable, onClose } = props;
+  const { className, children, closeable, onClose, color, style } = props;
   const [show, setShow] = useState<boolean>(true);
   const handleClose = (e?: React.MouseEvent) => {
     setShow(false);
@@ -22,9 +23,18 @@ const Tag: React.FC<TagProps> = (props) => {
     e.stopPropagation();
     handleClose(e);
   };
+  const classes = classnames('g-tag', className, {
+    colored: color,
+  });
   return (
     <Transition in={show} timeout={300} animation="zoom-in-center">
-      <div className={classnames('g-tag', className)}>
+      <div
+        className={classes}
+        style={{
+          ...style,
+          background: color,
+        }}
+      >
         <span>{children}</span>
         {closeable && (
           <CloseOutlined

@@ -58,7 +58,7 @@
     transform: translateY(-50%);
     left: 11px;
     user-select: none;
-    &.placeholder{
+    &.placeholder {
       flex: 1;
       overflow: hidden;
       color: #bfbfbf;
@@ -136,8 +136,8 @@
       cursor: not-allowed;
     }
   }
-  &-multiple{
-    &.placeholder{
+  &-multiple {
+    &.placeholder {
       margin-left: 11px;
       padding-right: 18px;
       flex: 1;

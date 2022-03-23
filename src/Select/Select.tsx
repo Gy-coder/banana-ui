@@ -24,11 +24,20 @@ export interface SelectProps {
   value: string | string[];
   onChange: (newValue: string | string[]) => void;
   multiple?: boolean;
+  placeholder?: string;
 }
 
 const SelectComponent: React.FC<SelectProps> = (props) => {
-  const { children, value, onChange, className, style, disabled, multiple } =
-    props;
+  const {
+    children,
+    value,
+    onChange,
+    className,
+    style,
+    disabled,
+    multiple,
+    placeholder,
+  } = props;
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [highlightIndex, setHighlightIndex] = useState<number>(-1);
   const length = (children as Array<ReactNode>).length;
@@ -78,6 +87,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         }
         setHighlightIndex(idxDown);
         setTimeout(() => {
+          if (!dropdownRef.current) return;
           const { height: ulHeight, top: ulTop } =
             dropdownRef.current!.getBoundingClientRect();
           const { top, height } = document
@@ -97,6 +107,7 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
         }
         setHighlightIndex(idxUp);
         setTimeout(() => {
+          if (!dropdownRef.current) return;
           const { height: ulHeight, top: ulTop } =
             dropdownRef.current!.getBoundingClientRect();
           const { top, height } = document
@@ -177,14 +188,20 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
       >
         {multiple ? (
           <>
-            <div className="g-select-mutiple">
-              {(value as string[]).map((v) => {
-                return (
-                  <Tag key={v} closeable onClose={() => handleClickTag(v)}>
-                    {v}
-                  </Tag>
-                );
+            <div
+              className={classnames('g-select-multiple', {
+                placeholder: value.length === 0,
               })}
+            >
+              {value.length === 0
+                ? placeholder
+                : (value as string[]).map((v) => {
+                    return (
+                      <Tag key={v} closeable onClose={() => handleClickTag(v)}>
+                        {v}
+                      </Tag>
+                    );
+                  })}
               <div className="g-select-search">
                 <input
                   ref={inputRef}
@@ -197,7 +214,13 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
           </>
         ) : (
           <>
-            <span className="g-select-item">{value}</span>
+            <span
+              className={classnames('g-select-item', {
+                placeholder: (value as string).trim().length === 0,
+              })}
+            >
+              {(value as string).trim().length === 0 ? placeholder : value}
+            </span>
             <span className="g-select-search">
               <input
                 ref={inputRef}
@@ -208,15 +231,15 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
             </span>
           </>
         )}
+        <span
+          className={classnames('g-select-arrow', {
+            isOpen: showDropDown,
+            isClose: !showDropDown,
+          })}
+        >
+          <DownOutlined />
+        </span>
       </div>
-      <span
-        className={classnames('g-select-arrow', {
-          isOpen: showDropDown,
-          isClose: !showDropDown,
-        })}
-      >
-        <DownOutlined />
-      </span>
       {generateDropDown()}
     </div>
   );

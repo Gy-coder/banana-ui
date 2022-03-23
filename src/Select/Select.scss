@@ -28,7 +28,6 @@
       flex-wrap: wrap;
       max-width: 100%;
       padding: 1px 4px;
-      margin-right: 24px;
       .g-tag {
         margin: 2px;
       }
@@ -59,6 +58,14 @@
     transform: translateY(-50%);
     left: 11px;
     user-select: none;
+    &.placeholder{
+      flex: 1;
+      overflow: hidden;
+      color: #bfbfbf;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      pointer-events: none;
+    }
   }
   &-arrow {
     position: absolute;
@@ -127,6 +134,18 @@
     }
     input {
       cursor: not-allowed;
+    }
+  }
+  &-multiple{
+    &.placeholder{
+      margin-left: 11px;
+      padding-right: 18px;
+      flex: 1;
+      overflow: hidden;
+      color: #bfbfbf;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      pointer-events: none;
     }
   }
 }

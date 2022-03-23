@@ -21,6 +21,7 @@ const Demo = () => {
     <div style={{ padding: 20 }}>
       <p>你选中的value为: {value}</p>
       <Select
+        placeholder="多选框"
         value={value}
         onChange={handleChange}
         multiple

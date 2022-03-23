@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   CloseCircleOutlined,
@@ -70,6 +70,10 @@ const LightUp: React.FC<LightUpProps> = (props) => {
   const { src, visible, close } = props;
   const [deg, setDeg] = useState<number>(0);
   const [n, setN] = useState<number>(1);
+  useEffect(() => {
+    if (visible) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'auto';
+  }, [visible]);
   const handleTurnLeft = () => {
     setDeg(deg - 90);
   };

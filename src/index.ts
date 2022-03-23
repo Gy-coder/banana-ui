@@ -26,3 +26,4 @@ export { default as AutoComplete } from './AutoComplete/AutoComplete';
 export { default as Affix } from './Affix/Affix';
 export { default as Select } from './Select/Select';
 export { default as Tag } from './Tag/Tag';
+export { default as Drawer } from './Drawer/Drawer';

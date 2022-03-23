@@ -32,6 +32,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 
 ### 数据展示
 
+- [Drawer 抽屉](./components/drawer)
 - [Tabs 标签页](./components/tabs)
 - [Tag 标签](./components/tag)
 - [Collpase 折叠面板](./components/collapse)

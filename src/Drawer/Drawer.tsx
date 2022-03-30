@@ -41,6 +41,7 @@ const Drawer: React.FC<DrawerProps> = (props) => {
     children,
   } = props;
   const componentRef = useRef<HTMLDivElement>(null);
+  const placementRef = useRef<DrawerProps['placement']>(placement);
   const handleClose = () => {
     onClose();
   };
@@ -49,12 +50,17 @@ const Drawer: React.FC<DrawerProps> = (props) => {
     if (visible && showMask) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'auto';
   }, [visible]);
+
+  useEffect(() => {
+    placementRef.current = placement;
+  }, [placement]);
   const html = () => {
     return (
       <div
         className={classnames(cn, cn + `-${placement}`, {
           'g-drawer-open': visible,
           'g-drawer-close': !visible,
+          'g-drawer-remove-transition': placementRef.current !== placement,
         })}
         ref={componentRef}
         style={{

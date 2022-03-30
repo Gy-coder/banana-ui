@@ -69,6 +69,12 @@
       opacity: 1;
     }
   }
+
+  &.g-drawer-remove-transition {
+    .g-drawer-content {
+      transition: none;
+    }
+  }
 }
 
 .g-drawer-right,

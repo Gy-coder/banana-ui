@@ -57,6 +57,9 @@ const Drawer: React.FC<DrawerProps> = (props) => {
           'g-drawer-close': !visible,
         })}
         ref={componentRef}
+        style={{
+          zIndex,
+        }}
       >
         {!!showMask && (
           <div

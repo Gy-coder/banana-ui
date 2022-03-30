@@ -11,6 +11,7 @@ export interface DrawerProps {
   container?: HTMLElement | false;
   placement?: 'top' | 'left' | 'bottom' | 'right';
   width?: number;
+  height?: number;
   zIndex?: number;
   showMask?: boolean;
   maskClosable?: boolean;
@@ -27,9 +28,10 @@ const Drawer: React.FC<DrawerProps> = (props) => {
     visible,
     onClose,
     closeable,
-    placement = 'top',
+    placement,
     container,
     width,
+    height,
     zIndex,
     showMask,
     maskClosable,
@@ -77,7 +79,10 @@ const Drawer: React.FC<DrawerProps> = (props) => {
           className={classnames(cn + '-content')}
           style={{
             zIndex,
-            width,
+            width:
+              placement === 'left' || placement === 'right' ? width : '100%',
+            height:
+              placement === 'top' || placement === 'bottom' ? height : '100%',
           }}
         >
           <div className={cn + '-header'} style={headerStyle}>
@@ -111,6 +116,7 @@ Drawer.defaultProps = {
   closeable: true,
   placement: 'right',
   width: 384,
+  height: 384,
   zIndex: 1000,
   showMask: true,
   maskClosable: true,

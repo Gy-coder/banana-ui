@@ -16,6 +16,8 @@ const Demo = () => {
       <RadioGroup value={x} onChange={handleChange}>
         <Radio value={'left'}>left</Radio>
         <Radio value={'right'}>right</Radio>
+        <Radio value={'top'}>top</Radio>
+        <Radio value={'bottom'}>bottom</Radio>
       </RadioGroup>
       <br />
       <Button onClick={() => setVisible(true)}>show</Button>

@@ -51,10 +51,10 @@ describe('Testing Drawer component', () => {
       expect(
         wrapper.container.querySelectorAll('.g-drawer')[0],
       ).toBeInTheDocument();
-      // expect(wrapper.asFragment()).toMatchSnapshot()
+      expect(wrapper.asFragment()).toMatchSnapshot();
     });
-    // const closeBtn = document.getElementsByClassName('close-button')[0]
-    // fireEvent.click(closeBtn)
-    // expect(screen.queryByText('title')).not.toBeInTheDocument()
+    const closeBtn = document.getElementsByClassName('close-button')[0];
+    fireEvent.click(closeBtn);
+    expect(screen.queryByText('title')).not.toBeInTheDocument();
   });
 });

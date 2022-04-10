@@ -1,5 +1,6 @@
 $grey: #ddd;
 $border-radius: 4px;
+
 .g-collapse {
   border: 1px solid $grey;
   border-radius: $border-radius;
@@ -28,6 +29,9 @@ $border-radius: 4px;
     }
     > .g-collapse-item-content {
       padding: 8px;
+      box-sizing: border-box;
+      transition: height 250ms;
+      overflow: hidden;
     }
   }
 }

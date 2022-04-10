@@ -29,6 +29,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 * [Input 输入框](./components/input)
 * [Radio 单选框](./components/radio)
 * [Rate 评分](./components/rate)
+* [Select 选择框](./components/select)
 
 ### 数据展示
 

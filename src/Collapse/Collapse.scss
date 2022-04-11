@@ -30,7 +30,7 @@ $border-radius: 4px;
     > .g-collapse-item-content {
       padding: 8px;
       box-sizing: border-box;
-      transition: height 250ms;
+      transition: height 250ms linear;
       overflow: hidden;
     }
   }

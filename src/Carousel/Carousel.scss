@@ -1,0 +1,133 @@
+.g-carousel {
+    &-window {
+      overflow: hidden;
+      position: relative;
+    }
+    &-wrapper {
+      position: relative;
+    }
+    &-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10%;
+      z-index: 15;
+      > span {
+        position: relative;
+        display: inline-block;
+        flex: 0 1 auto;
+        box-sizing: content-box;
+        width: 24px;
+        height: 4px;
+        margin: 0 6px;
+        padding: 0;
+        text-align: center;
+        text-indent: -999px;
+        vertical-align: top;
+        transition: all 0.5s;
+        > button {
+          display: block;
+          width: 100%;
+          height: 4px;
+          padding: 0;
+          color: transparent;
+          font-size: 0;
+          background: #fff;
+          border: 0;
+          border-radius: 1px;
+          outline: none;
+          cursor: pointer;
+          opacity: 0.3;
+          transition: all 0.5s;
+          &.active {
+            background: #fff;
+            opacity: 1;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+        }
+        &.active {
+          width: 30px;
+          background: white;
+        }
+      }
+    }
+    &-button {
+      z-index: 15;
+      position: absolute;
+      top: 50%;
+      width: 32px;
+      height: 48px;
+      background: rgba(#000, 0.3);
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &.g-carousel-button-left {
+        left: 0;
+        transform: translate(-25%, -50%);
+      }
+      &.g-carousel-button-right {
+        right: 0;
+        transform: translate(25%, -50%);
+      }
+    }
+  }
+  
+  .g-carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    visibility: hidden;
+    &.active {
+      position: relative;
+      z-index: 1;
+      visibility: visible;
+    }
+  }
+  
+  .g-carousel-item.slide {
+    &.carousel-enter {
+      transform: translateX(100%);
+      visibility: visible;
+      transition: none;
+      &.reverse {
+        transform: translateX(-100%);
+      }
+    }
+    &.carousel-enter-active {
+      transition: all 0.5s ease;
+      transform: translateX(0) !important;
+      visibility: visible;
+    }
+    &.carousel-enter-done {
+      visibility: visible;
+    }
+  
+    &.carousel-exit {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    &.carousel-exit-active {
+      transition: all 0.5s ease;
+      transform: translateX(-100%);
+      visibility: visible;
+      &.reverse {
+        transform: translateX(100%);
+      }
+    }
+    &.carousel-exit-done {
+      visibility: hidden;
+    }
+  }
+  

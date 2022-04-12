@@ -39,6 +39,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 - [Collpase 折叠面板](./components/collapse)
 - [Tree 树形控件](./components/tree)
 - [Image 图片](./components/image)
+- [Carousel 轮播](./components/carousel)
 
 ### 反馈
 

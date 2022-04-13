@@ -46,6 +46,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 - [Dialog 对话框](./components/dialog)
 - [Popover 气泡卡片](./components/popover)
 - [Toast 吐司](./components/toast)
+- [Notification 通知栏](./components/notification)
 
 ### 导航
 

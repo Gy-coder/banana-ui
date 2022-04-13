@@ -28,3 +28,4 @@ export { default as Select } from './Select/Select';
 export { default as Tag } from './Tag/Tag';
 export { default as Drawer } from './Drawer/Drawer';
 export { default as Carousel } from './Carousel/Carousel';
+export { default as Notification } from './Notification/Notification';

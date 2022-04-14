@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   CloseCircleOutlined,
@@ -9,11 +9,17 @@ import {
   EyeOutlined,
 } from '@ant-design/icons';
 import classes from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 import './Image.scss';
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallback?: string;
 }
+
+type coordinateType = {
+  x: number;
+  y: number;
+};
 
 const Image: React.FC<ImageProps> = (props) => {
   const { className, src, fallback, ...rest } = props;
@@ -22,8 +28,16 @@ const Image: React.FC<ImageProps> = (props) => {
   const [error, setError] = useState<boolean>(false);
   const [innerSrc, setInnerSrc] = useState<string | undefined>(src);
   const [hover, setHover] = useState<boolean>(false);
-  const showLightUp = () => {
+  const [coordinate, setCoordinate] = useState<coordinateType>({
+    x: 0,
+    y: 0,
+  });
+  const showLightUp = (e: MouseEvent<HTMLElement>) => {
     !error && setVisible(true);
+    setCoordinate({
+      x: e.clientX,
+      y: e.clientY,
+    });
   };
   const hideLightUp = () => {
     setVisible(false);
@@ -55,7 +69,12 @@ const Image: React.FC<ImageProps> = (props) => {
           preview
         </div>
       )}
-      <LightUp src={innerSrc} visible={visible} close={hideLightUp} />
+      <LightUp
+        src={innerSrc}
+        visible={visible}
+        close={hideLightUp}
+        coordinate={coordinate}
+      />
     </div>
   );
 };
@@ -64,10 +83,11 @@ interface LightUpProps {
   src?: string;
   visible: boolean;
   close: () => void;
+  coordinate: coordinateType;
 }
 
 const LightUp: React.FC<LightUpProps> = (props) => {
-  const { src, visible, close } = props;
+  const { src, visible, close, coordinate } = props;
   const [deg, setDeg] = useState<number>(0);
   const [n, setN] = useState<number>(1);
   useEffect(() => {
@@ -95,8 +115,18 @@ const LightUp: React.FC<LightUpProps> = (props) => {
   };
   const render = () => {
     return (
-      visible && (
-        <div className="banana-image-lightup-wrapper">
+      <CSSTransition
+        in={visible}
+        timeout={100}
+        classNames="animation"
+        unmountOnExit
+      >
+        <div
+          className="banana-image-lightup-wrapper"
+          style={{
+            transformOrigin: `${coordinate.x}px ${coordinate.y}px`,
+          }}
+        >
           <div className="banana-image-lightup-mask" onClick={handleClose} />
           <ul className="banana-image-option-wrapper">
             <li className="banana-image-option-item" onClick={handleClose}>
@@ -125,7 +155,7 @@ const LightUp: React.FC<LightUpProps> = (props) => {
             />
           </div>
         </div>
-      )
+      </CSSTransition>
     );
   };
   return ReactDOM.createPortal(render(), document.body);

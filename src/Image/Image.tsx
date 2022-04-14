@@ -117,7 +117,7 @@ const LightUp: React.FC<LightUpProps> = (props) => {
     return (
       <CSSTransition
         in={visible}
-        timeout={100}
+        timeout={300}
         classNames="animation"
         unmountOnExit
       >

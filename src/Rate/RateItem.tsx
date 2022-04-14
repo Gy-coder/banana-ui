@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -9,15 +9,29 @@ interface Props {
   allowClear: boolean;
   allowHalf: boolean;
   readonly: boolean;
+  hoverValue: number;
+  setHoverValue: (value: number) => void;
 }
 
 const RateItem: React.FC<Props> = (props) => {
-  const { value, onClick, curValue, allowClear, readonly, allowHalf } = props;
+  const {
+    value,
+    onClick,
+    curValue,
+    allowClear,
+    readonly,
+    hoverValue,
+    setHoverValue,
+  } = props;
+  useEffect(() => {
+    console.log('hoverValue', hoverValue, 'curValue', curValue, 'value', value);
+  });
   const classes = classnames('g-rate-item', {
-    active: value <= curValue,
+    active: value <= curValue && hoverValue === 0,
+    'g-rate-item-hover': value <= hoverValue && !readonly,
     readonly,
   });
-  const handleClick = (value: number) => {
+  const handleClick = () => {
     if (readonly) return;
     if (allowClear && value === curValue) {
       onClick(0);
@@ -25,13 +39,20 @@ const RateItem: React.FC<Props> = (props) => {
     }
     onClick(value);
   };
+  const handleMouseEnter = () => {
+    if (readonly) return;
+    setHoverValue(value);
+  };
+  const handleMouseLeave = () => {
+    setHoverValue(0);
+  };
   return (
     <>
       <AiFillStar
         className={classes}
-        onClick={() => {
-          handleClick(value);
-        }}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
     </>
   );

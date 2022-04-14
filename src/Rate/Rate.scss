@@ -30,15 +30,14 @@ $height: 1.6em;
         & + & {
           margin-left: 4px;
         }
-        &:hover {
-          transform: scale(1.2);
+
+        &.g-rate-item-hover {
+          transform: scale(1.1);
+          fill: $active;
         }
         &.readonly {
           &.g-rate-item {
             cursor: default;
-          }
-          &:hover {
-            transform: scale(1);
           }
         }
       }

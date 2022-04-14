@@ -51,6 +51,7 @@ const Rate: React.FC<Props> = (props) => {
   const handleClick = (value: number) => {
     onChange(value);
   };
+  const [hoverValue, setHoverValue] = useState(0);
   return (
     <div className={classes}>
       {[1, 2, 3, 4, 5].map((item) => {
@@ -66,6 +67,8 @@ const Rate: React.FC<Props> = (props) => {
                   allowClear={allowClear}
                   allowHalf={allowHalf}
                   readonly={readonly}
+                  hoverValue={hoverValue}
+                  setHoverValue={setHoverValue}
                 />
               </div>
             ) : null}
@@ -78,6 +81,8 @@ const Rate: React.FC<Props> = (props) => {
                 allowClear={allowClear}
                 allowHalf={allowHalf}
                 readonly={readonly}
+                hoverValue={hoverValue}
+                setHoverValue={setHoverValue}
               />
             </div>
           </div>

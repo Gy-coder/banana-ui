@@ -1,0 +1,48 @@
+.g-scroll {
+  position: relative;
+  overflow: hidden;
+  &-inner {
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  &-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 10px;
+  }
+  &-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 0px;
+    left: 2px;
+    border-radius: 3px;
+    background: rgba(128, 128, 128, 0.8);
+  }
+  &-pulling {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+  &-text {
+    font-size: 12px;
+  }
+  &-icon {
+    font-size: 30px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -53,3 +53,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 - [Affix 固钉](./components/affix)
 
 * [Pagination 分页](./components/pagination)
+
+### 其他
+
+- [Scroll 滚动条](./components/scroll)

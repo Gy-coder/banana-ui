@@ -30,3 +30,4 @@ export { default as Drawer } from './Drawer/Drawer';
 export { default as Carousel } from './Carousel/Carousel';
 export { default as Notification } from './Notification/Notification';
 export { default as Scroll } from './Scroll/Scroll';
+export { default as DatePicker } from './DatePicker/DatePicker';

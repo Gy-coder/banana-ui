@@ -12,6 +12,7 @@ import * as utils from './utils';
 interface DatePickerProps {
   value: Date;
   onChange: (value: Date) => void;
+  placeholder?: string;
 }
 
 export type Mode = 'date' | 'month' | 'year' | 'century';
@@ -23,14 +24,15 @@ export type Time = {
 };
 
 const DatePicker: FC<DatePickerProps> = (props) => {
-  const { value, onChange } = props;
-  const { getYearMonthDay, generateDate } = utils;
+  const { value, onChange, placeholder = '请选择日期' } = props;
+  const { getYearMonthDay } = utils;
   const [showContent, setShowContent] = useState(false);
   const [mode, setMode] = useState<Mode>('date');
-  const [time, setTime] = useState<Time>(getYearMonthDay(value));
+  const [time, setTime] = useState<Time>(getYearMonthDay(value || new Date()));
   const componentRef = useRef<HTMLDivElement>(null);
   const formatData = useMemo(() => {
-    const { year, month, day } = getYearMonthDay(value);
+    if (!value) return '';
+    const { year, month, day } = getYearMonthDay(value || new Date());
     return `${year}-${month + 1}-${day}`;
   }, [value]);
 
@@ -79,7 +81,7 @@ const DatePicker: FC<DatePickerProps> = (props) => {
   const openDatePicker = () => {
     setMode('date');
     setShowContent(true);
-    setTime(getYearMonthDay(value));
+    setTime(getYearMonthDay(value || new Date()));
   };
 
   useClickOutside(componentRef, () => {
@@ -97,7 +99,7 @@ const DatePicker: FC<DatePickerProps> = (props) => {
         type="text"
         value={formatData}
         onClick={openDatePicker}
-        placeholder="请输入日期"
+        placeholder={placeholder}
         onChange={() => {}}
       />
       {showContent && render()}

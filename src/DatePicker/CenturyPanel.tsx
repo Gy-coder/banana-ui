@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
+import React, { FC, useMemo } from 'react';
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import classes from 'classnames';
 import * as utils from './utils';
@@ -13,7 +13,7 @@ export interface Props {
 
 const CenturyPanel: FC<Props> = (props) => {
   const { time, setTime, setMode, value } = props;
-  const { year } = utils.getYearMonthDay(value);
+  const { year } = utils.getYearMonthDay(value || new Date());
   const visibleTenYear = useMemo(() => {
     const arr = [];
     const prefix = Math.floor(time.year / 100);
@@ -24,7 +24,7 @@ const CenturyPanel: FC<Props> = (props) => {
   }, [time]);
   const isCurrentTenYear = (item: string) => {
     const arr = item.split('-').map((v) => parseInt(v));
-    return year >= arr[0] && year <= arr[1];
+    return value && year >= arr[0] && year <= arr[1];
   };
   const prevTenYear = () => {
     setTime({ year: time.year - 100, month: time.month, day: time.day });

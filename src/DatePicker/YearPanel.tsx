@@ -15,10 +15,10 @@ const YearPanel: FC<Props> = (props) => {
   const { time, setTime, value, setMode } = props;
   const { generateDate, getYearMonthDay } = utils;
   const isCurrentYear = (num: number) => {
-    const { year } = getYearMonthDay(value);
+    const { year } = getYearMonthDay(value || new Date());
     const { year: y } = getYearMonthDay(generateDate(num, 1, 1));
     // console.log(year, y);
-    return year === y;
+    return value && year === y;
   };
   const visibleYear = useMemo(() => {
     const arr = [];

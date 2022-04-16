@@ -59,8 +59,8 @@ const DatePanel: FC<Props> = (props) => {
   };
   const isSelect = (date: Date) => {
     const { year, month, day } = getYearMonthDay(date);
-    const { year: y, month: m, day: d } = getYearMonthDay(value);
-    return year === y && month === m && day === d;
+    const { year: y, month: m, day: d } = getYearMonthDay(value || new Date());
+    return value && year === y && month === m && day === d;
   };
   const chooseDate = (date: Date) => {
     const { year, month, day } = getYearMonthDay(date);

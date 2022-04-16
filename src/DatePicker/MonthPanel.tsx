@@ -32,9 +32,9 @@ const MonthPanel: FC<Props> = (props) => {
     const { year, month } = getYearMonthDay(
       generateDate(time.year, time.month, 1),
     );
-    const { year: y1 } = getYearMonthDay(value);
+    const { year: y1 } = getYearMonthDay(value || new Date());
     const { year: y, month: m } = getYearMonthDay(generateDate(y1, num, 1));
-    return year === y && month === m;
+    return value && year === y && month === m;
   };
   const prevYear = () => {
     const d = generateDate(time.year, time.month, 1);

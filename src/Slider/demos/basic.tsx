@@ -13,6 +13,7 @@ export default function Demo() {
   }, [value]);
   return (
     <>
+      你选中的值是:{value}
       <Slider value={value} onChange={handleChange} min={100} max={250} />
     </>
   );

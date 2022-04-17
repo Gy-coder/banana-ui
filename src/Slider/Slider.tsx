@@ -1,10 +1,5 @@
-import React, {
-  FC,
-  useMemo,
-  useRef,
-  useEffect,
-  TouchEventHandler,
-} from 'react';
+import React, { FC, useMemo, useRef, useEffect, ReactNode } from 'react';
+import classnames from 'classnames';
 import './Slider.scss';
 
 interface Props {
@@ -12,17 +7,22 @@ interface Props {
   onChange: (value: number) => void;
   min?: number;
   max?: number;
+  marks?: { [Key: number]: ReactNode };
 }
 
 // percent = (value - min) / (max - min)
 
 const Slider: FC<Props> = (props) => {
-  const { value, onChange, min = 0, max = 100 } = props;
+  const { value, onChange, min = 0, max = 100, marks } = props;
   const sliderRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef<boolean>(false);
   useEffect(() => {
-    console.log(draggingRef.current);
-  }, [draggingRef.current]);
+    const keys = Object.keys(marks || {}).map((v) => parseInt(v));
+    for (let key of keys) {
+      if (key < min || key > max)
+        throw new Error('marks里的key值必须介于[min,max]之间');
+    }
+  }, []);
   const percent = useMemo(() => {
     if (value < min || value > max)
       throw new Error('The value must between min and max');
@@ -49,7 +49,7 @@ const Slider: FC<Props> = (props) => {
   const handleTouchStart = () => {
     draggingRef.current = true;
   };
-  const handleTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
+  const handleTouchMove = (e: React.TouchEvent) => {
     if (!draggingRef.current) return;
     const x = e.touches[0].clientX;
     calcPercentAndValue(x);
@@ -65,6 +65,40 @@ const Slider: FC<Props> = (props) => {
       const value = Math.round((max - min) * percent + min);
       onChange(value);
     }
+  };
+  const renderDot = () => {
+    return Object.keys(marks || {}).map((item) => {
+      const val = parseInt(item);
+      const left = Math.round(((val - min) / (max - min)) * 100);
+      return (
+        <span
+          className={classnames('g-slider-dot', {
+            'g-slider-dot-active': val <= value,
+          })}
+          key={item}
+          style={{
+            left: `${left}%`,
+          }}
+        />
+      );
+    });
+  };
+  const renderText = () => {
+    return Object.keys(marks || {}).map((item) => {
+      const val = parseInt(item);
+      const left = Math.round(((val - min) / (max - min)) * 100);
+      return (
+        <span
+          className={classnames('g-slider-mark-text', {
+            'g-slider-mark-text-active': val <= value,
+          })}
+          style={{ left: `${left}%` }}
+        >
+          {/*@ts-ignore */}
+          {marks[item]}
+        </span>
+      );
+    });
   };
   useEffect(() => {
     document.addEventListener('mouseup', handleMouseUp);
@@ -88,6 +122,8 @@ const Slider: FC<Props> = (props) => {
     >
       <div className="g-slider-rail" />
       <div className="g-slider-track" style={{ width: percent + '%' }} />
+      <div className="g-slider-steps">{renderDot()}</div>
+      <div className="g-slider-mark">{renderText()}</div>
       <div
         className="g-slider-handle"
         style={{ left: percent + '%' }}

@@ -26,7 +26,7 @@ const Slider: FC<Props> = (props) => {
   const percent = useMemo(() => {
     if (value < min || value > max)
       throw new Error('The value must between min and max');
-    return Math.round(((value - min) / (max - min)) * 100);
+    return ((value - min) / (max - min)) * 100;
   }, [value, min, max]);
   const handleClick = (e: React.MouseEvent) => {
     const x = e.clientX;
@@ -61,7 +61,7 @@ const Slider: FC<Props> = (props) => {
   const calcPercentAndValue = (x: number) => {
     const { left, width } = sliderRef.current!.getBoundingClientRect();
     if (x >= left && x <= left + width) {
-      const percent = Math.round(((x - left) / width) * 100) / 100;
+      const percent = (((x - left) / width) * 100) / 100;
       const value = Math.round((max - min) * percent + min);
       onChange(value);
     }
@@ -84,7 +84,7 @@ const Slider: FC<Props> = (props) => {
     });
   };
   const renderText = () => {
-    return Object.keys(marks || {}).map((item) => {
+    return Object.keys(marks || {}).map((item: string) => {
       const val = parseInt(item);
       const left = Math.round(((val - min) / (max - min)) * 100);
       return (
@@ -94,8 +94,7 @@ const Slider: FC<Props> = (props) => {
           })}
           style={{ left: `${left}%` }}
         >
-          {/*@ts-ignore */}
-          {marks[item]}
+          {marks![item as keyof typeof marks]}
         </span>
       );
     });

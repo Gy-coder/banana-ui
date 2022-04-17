@@ -25,7 +25,7 @@ export default function Demo() {
         value={value}
         onChange={handleChange}
         min={100}
-        max={250}
+        max={800}
         marks={marks}
       />
     </>

@@ -42,7 +42,6 @@
     background-color: #91d5ff;
     border-radius: 2px;
     transition: background-color 0.3s;
-    width: 33%;
   }
   &-handle {
     box-sizing: border-box;
@@ -57,7 +56,6 @@
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.6s,
       transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    left: 33%;
     transform: translateX(-50%);
   }
   &-steps {

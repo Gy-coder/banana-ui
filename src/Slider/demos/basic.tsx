@@ -4,7 +4,7 @@ import { Slider } from 'banana-ui';
 import { useEffect } from 'react';
 
 export default function Demo() {
-  const [value, setValue] = useState(190);
+  const [value, setValue] = useState(50);
   const handleChange = (value: number) => {
     setValue(value);
   };
@@ -14,7 +14,7 @@ export default function Demo() {
   return (
     <>
       你选中的值是:{value}
-      <Slider value={value} onChange={handleChange} min={100} max={250} />
+      <Slider value={value} onChange={handleChange} />
     </>
   );
 }

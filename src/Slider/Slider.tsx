@@ -16,6 +16,7 @@ const Slider: FC<Props> = (props) => {
   const { value, onChange, min = 0, max = 100, marks } = props;
   const sliderRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const keys = Object.keys(marks || {}).map((v) => parseInt(v));
     for (let key of keys) {
@@ -31,6 +32,7 @@ const Slider: FC<Props> = (props) => {
   const handleClick = (e: React.MouseEvent) => {
     const x = e.clientX;
     calcPercentAndValue(x);
+    handleInputFocus();
   };
   const handleMouseUp = () => {
     draggingRef.current = false;
@@ -93,11 +95,30 @@ const Slider: FC<Props> = (props) => {
             'g-slider-mark-text-active': val <= value,
           })}
           style={{ left: `${left}%` }}
-        >
-          {marks![item as keyof typeof marks]}
-        </span>
+          key={item}
+          children={marks![item as keyof typeof marks]}
+        />
       );
     });
+  };
+  const handleInputFocus = () => {
+    inputRef.current!.focus();
+  };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowRight':
+        const Rightpercent = percent + 1;
+        if (Rightpercent > 100) return;
+        const Rightvalue = Math.round((max - min) * (Rightpercent / 100) + min);
+        onChange(Rightvalue);
+        break;
+      case 'ArrowLeft':
+        const Leftpercent = percent - 1;
+        if (Leftpercent < 0) return;
+        const Leftvalue = Math.round((max - min) * (Leftpercent / 100) + min);
+        onChange(Leftvalue);
+        break;
+    }
   };
   useEffect(() => {
     document.addEventListener('mouseup', handleMouseUp);
@@ -128,6 +149,7 @@ const Slider: FC<Props> = (props) => {
         style={{ left: percent + '%' }}
         onMouseDown={handleMouseDown}
       />
+      <input type="text" onKeyDown={handleKeyDown} ref={inputRef} />
     </div>
   );
 };

@@ -32,3 +32,4 @@ export { default as Notification } from './Notification/Notification';
 export { default as Scroll } from './Scroll/Scroll';
 export { default as DatePicker } from './DatePicker/DatePicker';
 export { default as Slider } from './Slider/Slider';
+export { default as Tooltip } from './Tooltip/Tooltip';

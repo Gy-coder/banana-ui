@@ -1,5 +1,6 @@
 import React, { FC, useMemo, useRef, useEffect, ReactNode } from 'react';
 import classnames from 'classnames';
+import Tooltip from '../Tooltip/Tooltip';
 import './Slider.scss';
 
 interface Props {
@@ -144,11 +145,14 @@ const Slider: FC<Props> = (props) => {
       <div className="g-slider-track" style={{ width: percent + '%' }} />
       <div className="g-slider-steps">{renderDot()}</div>
       <div className="g-slider-mark">{renderText()}</div>
-      <div
-        className="g-slider-handle"
-        style={{ left: percent + '%' }}
-        onMouseDown={handleMouseDown}
-      />
+      <Tooltip content={value.toString()}>
+        <div
+          className="g-slider-handle"
+          style={{ left: percent + '%' }}
+          onMouseDown={handleMouseDown}
+        />
+      </Tooltip>
+
       <input type="text" onKeyDown={handleKeyDown} ref={inputRef} />
     </div>
   );

@@ -15,7 +15,7 @@ type placementType = 'top' | 'left' | 'right' | 'bottom';
 
 export interface Props {
   className?: string;
-  style: CSSProperties;
+  style?: CSSProperties;
   content: string;
   placement?: placementType;
 }

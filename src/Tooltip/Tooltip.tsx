@@ -39,7 +39,7 @@ const Tooltip: FC<Props> = (props) => {
     setPosition({ top, left });
   };
   const handleMouseLeave = () => {
-    // setVisible(false);
+    setVisible(false);
   };
 
   return (
@@ -76,22 +76,20 @@ const TooltipComponent = forwardRef<HTMLDivElement, TooltipComponentProps>(
     const { top, left } = position;
 
     return ReactDOM.createPortal(
-      <div style={{ border: '1px solid red' }}>
-        <div
-          className={classname('g-tooltip-text', {
-            'g-tooltip-text-open': visible,
-            [`g-tooltip-${placement}`]: placement,
-          })}
-          ref={ref}
-          //@ts-ignore
-          style={{
-            ...(visible ? { top, left } : { top: -9999, left: -9999 }),
-          }}
-          onMouseEnter={() => setVisible(true)}
-          onMouseLeave={() => setVisible(false)}
-        >
-          {content}
-        </div>
+      <div
+        className={classname('g-tooltip-text', {
+          'g-tooltip-text-open': visible,
+          [`g-tooltip-${placement}`]: placement,
+        })}
+        ref={ref}
+        //@ts-ignore
+        style={{
+          ...(visible ? { top, left } : { top: -9999, left: -9999 }),
+        }}
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+      >
+        {content}
       </div>,
       document.body,
     );

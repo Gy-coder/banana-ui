@@ -57,6 +57,28 @@
     transition: border-color 0.3s, box-shadow 0.6s,
       transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     transform: translateX(-50%);
+    > .g-slider-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%);
+      left: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: #404040;
+      color: white;
+      padding: 8px;
+      border-radius: 2px;
+      margin-top: -8px;
+      cursor: initial;
+      &::after {
+        content: '';
+        position: absolute;
+        border: 8px solid transparent;
+        top: 100%;
+        border-top-color: #404040;
+      }
+    }
   }
   &-steps {
     box-sizing: border-box;

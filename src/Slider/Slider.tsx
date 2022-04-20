@@ -1,6 +1,12 @@
-import React, { FC, useMemo, useRef, useEffect, ReactNode } from 'react';
+import React, {
+  FC,
+  useMemo,
+  useRef,
+  useEffect,
+  ReactNode,
+  useState,
+} from 'react';
 import classnames from 'classnames';
-import Tooltip from '../Tooltip/Tooltip';
 import './Slider.scss';
 
 interface Props {
@@ -18,6 +24,7 @@ const Slider: FC<Props> = (props) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
   useEffect(() => {
     const keys = Object.keys(marks || {}).map((v) => parseInt(v));
     for (let key of keys) {
@@ -37,11 +44,13 @@ const Slider: FC<Props> = (props) => {
   };
   const handleMouseUp = () => {
     draggingRef.current = false;
+    closeTooltip();
   };
   const handleMouseMove = (e: MouseEvent) => {
     if (!draggingRef.current) return;
     const x = e.clientX;
     calcPercentAndValue(x);
+    openTooltip();
   };
   const handleMouseDown = () => {
     draggingRef.current = true;
@@ -56,9 +65,11 @@ const Slider: FC<Props> = (props) => {
     if (!draggingRef.current) return;
     const x = e.touches[0].clientX;
     calcPercentAndValue(x);
+    openTooltip();
   };
   const handleTouchEnd = () => {
     draggingRef.current = false;
+    closeTooltip();
   };
 
   const calcPercentAndValue = (x: number) => {
@@ -69,6 +80,10 @@ const Slider: FC<Props> = (props) => {
       onChange(value);
     }
   };
+
+  const openTooltip = () => setShowTooltip(true);
+  const closeTooltip = () => setShowTooltip(false);
+
   const renderDot = () => {
     return Object.keys(marks || {}).map((item) => {
       const val = parseInt(item);
@@ -145,14 +160,15 @@ const Slider: FC<Props> = (props) => {
       <div className="g-slider-track" style={{ width: percent + '%' }} />
       <div className="g-slider-steps">{renderDot()}</div>
       <div className="g-slider-mark">{renderText()}</div>
-      <Tooltip content={value.toString()}>
-        <div
-          className="g-slider-handle"
-          style={{ left: percent + '%' }}
-          onMouseDown={handleMouseDown}
-        />
-      </Tooltip>
-
+      <div
+        className="g-slider-handle"
+        style={{ left: percent + '%' }}
+        onMouseDown={handleMouseDown}
+        onMouseEnter={openTooltip}
+        onMouseLeave={closeTooltip}
+      >
+        {showTooltip && <div className="g-slider-tooltip">{value}</div>}
+      </div>
       <input type="text" onKeyDown={handleKeyDown} ref={inputRef} />
     </div>
   );

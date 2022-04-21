@@ -42,7 +42,7 @@
       width: 272px;
       height: 240px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: stretch;
       flex-wrap: wrap;
       > .days {
@@ -62,6 +62,7 @@
           border-radius: 2px;
           color: rgba(0, 0, 0, 0.65);
           user-select: none;
+          box-sizing: border-box;
           &.cell {
             cursor: pointer;
           }

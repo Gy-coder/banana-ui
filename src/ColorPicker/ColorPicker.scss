@@ -1,0 +1,142 @@
+.g-color-picker {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  &-trigger {
+    border: 1px solid #dcdee2;
+    /* 边框有4px的圆角 */
+    border-radius: 4px;
+    /* 4px的上下内间距,7px的左右内间距 */
+    padding: 4px 7px;
+    background-color: #000;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    color: #5e535f;
+    border: 1px solid #e2dfe2;
+    border-radius: 4px;
+    padding: 6px;
+    position: relative;
+    cursor: pointer;
+    &.no-value {
+      &::before {
+        content: '';
+        width: 24px;
+        height: 4px;
+        background-color: #333;
+        display: inline-block;
+        border-radius: 4px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      &::after {
+        content: '';
+        width: 24px;
+        height: 4px;
+        background-color: #333;
+        display: inline-block;
+        border-radius: 4px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+  &-popover {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 320px;
+    box-sizing: content-box;
+    border: 1px solid #ebeeff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 10;
+    padding: 7px;
+    text-align: left;
+    background: white;
+    > main {
+      display: flex;
+      justify-content: flex-start;
+      > .picker-panel {
+        background-color: rgb(255, 0, 0);
+        flex-grow: 1;
+        position: relative;
+        cursor: crosshair;
+        overflow: hidden;
+        > .picker-panel-white {
+          background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        > .picker-panel-black {
+          background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        > .picker-panel-slider {
+          position: absolute;
+          border: 1px solid #fff;
+          transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+      }
+      > .picker-bar {
+        position: relative;
+        margin-left: 12px;
+        width: 12px;
+        height: 180px;
+        padding: 2px 0;
+        background: linear-gradient(
+          180deg,
+          red 0,
+          #ff0 17%,
+          #0f0 33%,
+          #0ff 50%,
+          #00f 67%,
+          #f0f 83%,
+          red
+        );
+        > .picker-bar-trigger {
+          position: absolute;
+          top: 0;
+          left: 0;
+          cursor: pointer;
+          box-sizing: border-box;
+          border-radius: 1px;
+          background: #fff;
+          border: 1px solid #f0f0f0;
+          z-index: 1;
+          width: 100%;
+          height: 4px;
+          box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgb(0 0 0 / 30%),
+            0 0 1px 2px rgb(0 0 0 / 40%);
+        }
+      }
+    }
+    > footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      > .g-color-picker-colorcode {
+        font-size: 14px;
+      }
+      button + button {
+        margin: 8px;
+      }
+    }
+  }
+}

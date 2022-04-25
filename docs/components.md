@@ -32,6 +32,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 * [Select 选择框](./components/select)
 * [DatePicker 日期选择器](./components/datepicker)
 * [Slider 滑动输入框](./components/slider)
+* [ColorPicker 颜色选择器](./components/colorpicker)
 
 ### 数据展示
 

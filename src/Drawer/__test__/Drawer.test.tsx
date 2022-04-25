@@ -6,6 +6,7 @@ import {
   fireEvent,
   RenderResult,
   waitFor,
+  waitForElementToBeRemoved,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React, { useState } from 'react';
@@ -37,24 +38,23 @@ const Demo = () => {
 let wrapper: RenderResult, btn: HTMLButtonElement;
 
 describe('Testing Drawer component', () => {
-  beforeEach(() => {
+  it('Drawer should be render correct', async () => {
     wrapper = render(<Demo />);
     btn = screen.getByText('show');
-  });
-  it('Drawer should be render correct', async () => {
     expect(btn).toBeInTheDocument();
     fireEvent.click(btn);
     expect(visible).toBeTruthy();
     expect(screen.queryByText('title')).toBeInTheDocument();
     expect(wrapper.asFragment()).toMatchSnapshot();
-    await waitFor(() => {
-      expect(
-        wrapper.container.querySelectorAll('.g-drawer')[0],
-      ).toBeInTheDocument();
-      expect(wrapper.asFragment()).toMatchSnapshot();
-    });
+    expect(
+      wrapper.container.querySelector('.g-drawer.g-drawer-right.g-drawer-open'),
+    ).toBeInTheDocument();
+    expect(wrapper.asFragment()).toMatchSnapshot();
+  });
+  it('should close', async () => {
+    wrapper = render(<Demo />);
     const closeBtn = document.getElementsByClassName('close-button')[0];
     fireEvent.click(closeBtn);
-    expect(screen.queryByText('title')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(() => screen.queryAllByText('title'));
   });
 });

@@ -9,3 +9,13 @@ exports[`Testing Drawer component Drawer should be render correct 1`] = `
   </button>
 </DocumentFragment>
 `;
+
+exports[`Testing Drawer component Drawer should be render correct 2`] = `
+<DocumentFragment>
+  <button
+    class="g-button g-theme-button g-size-normal g-level-normal"
+  >
+    show
+  </button>
+</DocumentFragment>
+`;

@@ -1,3 +1,5 @@
+import './banana.scss';
+
 export { default as Button } from './Button/Button';
 export { default as ButtonGroup } from './Button/ButtonGroup';
 export { default as Switch } from './Switch/Switch';
@@ -33,3 +35,4 @@ export { default as Scroll } from './Scroll/Scroll';
 export { default as DatePicker } from './DatePicker/DatePicker';
 export { default as Slider } from './Slider/Slider';
 export { default as Tooltip } from './Tooltip/Tooltip';
+export { default as ColorPicker } from './ColorPicker/ColorPicker';

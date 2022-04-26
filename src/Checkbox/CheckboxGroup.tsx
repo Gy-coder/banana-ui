@@ -7,12 +7,14 @@ interface Props {
   values: string[];
   onChange: (values: string[]) => void;
   disabled: boolean;
+  vertical?: boolean;
 }
 
 const CheckboxGroup: React.FC<Props> = (props) => {
-  const { disabled, onChange, values, children } = props;
+  const { disabled, onChange, values, children, vertical = false } = props;
   const classes = classnames('g-checkbox-group', {
     disabled,
+    vertical,
   });
   const handleChange = (
     value: string,

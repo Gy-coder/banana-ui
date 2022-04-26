@@ -114,3 +114,11 @@
     margin-left: 8px;
   }
 }
+
+.g-checkbox-group.vertical {
+  display: flex;
+  flex-direction: column;
+  .g-checkbox-wrapper + .g-checkbox-wrapper {
+    margin-left: 0;
+  }
+}

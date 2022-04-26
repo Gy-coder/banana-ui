@@ -39,6 +39,7 @@ const TransferPanel: FC<TransferPanelProps> = (props) => {
           values={panelState.checked as string[]}
           onChange={handleCheck}
           disabled={false}
+          vertical
         >
           {props.data.map((item) => {
             return (

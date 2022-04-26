@@ -13,7 +13,7 @@ const PickerBar: FC<Props> = (props) => {
   const barRef = useRef<HTMLDivElement>(null);
   const dragging = useRef<boolean>(false);
   useEffect(() => {
-    const percent = h / 360;
+    const percent = Math.round((h / 360) * 100) / 100;
     triggerRef.current!.style.top = `${percent * 100}%`;
   }, [hsv]);
   const handleMouseUp = () => {

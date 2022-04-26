@@ -36,3 +36,4 @@ export { default as DatePicker } from './DatePicker/DatePicker';
 export { default as Slider } from './Slider/Slider';
 export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as ColorPicker } from './ColorPicker/ColorPicker';
+export { default as Transfer } from './Transfer/Transfer';

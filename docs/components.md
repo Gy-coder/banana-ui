@@ -23,16 +23,16 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 ### 数据录入
 
 - [AutoComplete 自动补全](./components/autocomplete)
-
-* [Checkbox 多选框](./components/checkbox)
-* [Switch 开关](./components/switch)
-* [Input 输入框](./components/input)
-* [Radio 单选框](./components/radio)
-* [Rate 评分](./components/rate)
-* [Select 选择框](./components/select)
-* [DatePicker 日期选择器](./components/datepicker)
-* [Slider 滑动输入框](./components/slider)
-* [ColorPicker 颜色选择器](./components/colorpicker)
+- [Checkbox 多选框](./components/checkbox)
+- [Switch 开关](./components/switch)
+- [Input 输入框](./components/input)
+- [Radio 单选框](./components/radio)
+- [Rate 评分](./components/rate)
+- [Select 选择框](./components/select)
+- [DatePicker 日期选择器](./components/datepicker)
+- [Slider 滑动输入框](./components/slider)
+- [ColorPicker 颜色选择器](./components/colorpicker)
+- [Transfer 穿梭框](./components/transfer)
 
 ### 数据展示
 
@@ -55,8 +55,7 @@ banana-ui 为开发者提供了丰富的 UI 组件 帮助您快速构建您的�
 ### 导航
 
 - [Affix 固钉](./components/affix)
-
-* [Pagination 分页](./components/pagination)
+- [Pagination 分页](./components/pagination)
 
 ### 其他
 

@@ -1,0 +1,27 @@
+.g-transfer {
+  display: inline-flex;
+  &-panel {
+    border: 1px solid red;
+    vertical-align: middle;
+    margin: 0 20px;
+    display: inline-block;
+    width: 200px;
+    border-radius: 4px;
+    &-body {
+      height: 200px;
+      overflow: scroll;
+    }
+  }
+  &-buttons {
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    > button + button {
+      margin-left: 8px;
+    }
+  }
+}
+
+.el-checkbox {
+  display: block !important;
+}

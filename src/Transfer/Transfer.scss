@@ -1,27 +1,32 @@
 .g-transfer {
   display: inline-flex;
+
   &-panel {
-    border: 1px solid red;
+    border: 1px solid #d9d9d9;
     vertical-align: middle;
     margin: 0 20px;
     display: inline-block;
-    width: 200px;
+    width: 180px;
     border-radius: 4px;
     &-body {
       height: 200px;
       overflow: scroll;
+      padding: 0 8px;
+    }
+    &-header {
+      padding: 4px 8px;
+      border-bottom: 1px solid #d9d9d9;
+    }
+    &-footer {
+      padding: 8px;
+      border-top: 1px solid #d9d9d9;
+      background: #fbfdff;
+      font-size: 16px;
     }
   }
   &-buttons {
     display: inline-block;
     display: flex;
     align-items: center;
-    > button + button {
-      margin-left: 8px;
-    }
   }
-}
-
-.el-checkbox {
-  display: block !important;
 }

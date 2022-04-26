@@ -27,8 +27,8 @@ export interface TransferProps {
 const Transfer: FC<TransferProps> = (props) => {
   const { targetData, sourceData } = useComputedData(props);
   const [checkedState, setCheckedState] = useState<{
-    sourceChecked: Array<any>;
-    targetChecked: Array<any>;
+    sourceChecked: Array<Key>;
+    targetChecked: Array<Key>;
   }>({
     sourceChecked: [],
     targetChecked: [],
@@ -67,6 +67,7 @@ const Transfer: FC<TransferProps> = (props) => {
         data={sourceData}
         props={props.props as Props}
         onCheckedChange={onSourceChange}
+        type="source"
       />
       <div className="g-transfer-buttons">
         <Button disabled={toTargetDisabled} onClick={addToSource}>
@@ -80,6 +81,7 @@ const Transfer: FC<TransferProps> = (props) => {
         data={targetData}
         props={props.props as Props}
         onCheckedChange={onTargetChange}
+        type="target"
       />
     </div>
   );

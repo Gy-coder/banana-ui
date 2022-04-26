@@ -5,9 +5,10 @@ import Checkbox from '../Checkbox/Checkbox';
 import CheckboxGroup from '../Checkbox/CheckboxGroup';
 
 export interface TransferPanelProps {
-  data: Array<any>;
+  data: any[];
   props: Props;
   onCheckedChange: (checked: Array<any>) => void;
+  type: 'source' | 'target';
 }
 
 export interface panelStateType {
@@ -27,13 +28,16 @@ const TransferPanel: FC<TransferPanelProps> = (props) => {
   }, [panelState.checked]);
   return (
     <div className="g-transfer-panel">
-      <Checkbox
-        checked={panelState.allChecked}
-        onChange={handleCheckAll}
-        value="全选"
-      >
-        全选
-      </Checkbox>
+      <div className="g-transfer-panel-header">
+        <Checkbox
+          checked={panelState.allChecked}
+          onChange={handleCheckAll}
+          value="全选"
+        >
+          全选
+        </Checkbox>
+      </div>
+
       <div className="g-transfer-panel-body">
         <CheckboxGroup
           values={panelState.checked as string[]}
@@ -56,6 +60,7 @@ const TransferPanel: FC<TransferPanelProps> = (props) => {
           })}
         </CheckboxGroup>
       </div>
+      <div className="g-transfer-panel-footer">{props.type}</div>
     </div>
   );
 };

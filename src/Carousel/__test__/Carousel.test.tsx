@@ -145,4 +145,7 @@ describe('test Carousel Component', () => {
     expect(screen.getByText('2').parentNode).toHaveClass('active');
     jest.clearAllTimers();
   });
+  xit('test touch event', () => {
+    const outline = wrapper.container.querySelector('.g-carousel');
+  });
 });

@@ -4,6 +4,7 @@
 .g-datepicker {
   position: relative;
   box-sizing: border-box;
+  display: inline-flex;
   &-date-panel {
     position: absolute;
     top: calc(100% + 8px);

@@ -6,9 +6,12 @@ import {
   fireEvent,
   render,
   RenderResult,
-  waitFor,
+  screen,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { config } from 'react-transition-group';
+
+config.disabled = true;
 
 describe('Test Tag component', () => {
   let wrapper: RenderResult;
@@ -27,7 +30,7 @@ describe('Test Tag component', () => {
     expect(wrapper.queryByText('Tag')).toBeInTheDocument();
     expect(wrapper.asFragment()).toMatchSnapshot();
   });
-  xit('Tag should be close', () => {
+  it('Tag should be close', () => {
     cleanup();
     const onClose = jest.fn();
     wrapper = render(
@@ -35,13 +38,11 @@ describe('Test Tag component', () => {
         Tag
       </Tag>,
     );
-    act(() => {
-      fireEvent.click(
-        wrapper.container.getElementsByClassName('g-tag-close-button')[0],
-      );
-    });
+    fireEvent.click(
+      wrapper.container.getElementsByClassName('g-tag-close-button')[0],
+    );
     expect(onClose).toBeCalledTimes(1);
-    expect(wrapper.queryByText('Tag')).not.toBeInTheDocument();
+    expect(screen.queryByText('Tag')).toBeNull();
     expect(wrapper.asFragment()).toMatchSnapshot();
   });
 });

@@ -23,9 +23,6 @@ const RateItem: React.FC<Props> = (props) => {
     hoverValue,
     setHoverValue,
   } = props;
-  useEffect(() => {
-    console.log('hoverValue', hoverValue, 'curValue', curValue, 'value', value);
-  });
   const classes = classnames('g-rate-item', {
     active: value <= curValue && hoverValue === 0,
     'g-rate-item-hover': value <= hoverValue && !readonly,

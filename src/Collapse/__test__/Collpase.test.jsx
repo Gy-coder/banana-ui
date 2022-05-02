@@ -10,6 +10,10 @@ import React, { useState } from 'react';
 import Collapse from '../Collapse';
 import CollapseItem from '../CollapseItem';
 
+import { config } from 'react-transition-group';
+
+config.disabled = true;
+
 afterEach(cleanup);
 
 describe('测试Collapse组件', () => {
@@ -31,8 +35,8 @@ describe('测试Collapse组件', () => {
         </Collapse>
       );
     };
-    const { asFragment } = render(<Temp />);
-    expect(document.querySelector('.g-collapse')).toBeInTheDocument();
+    const { asFragment, container } = render(<Temp />);
+    expect(container.querySelector('.g-collapse')).toBeInTheDocument();
     expect(asFragment()).toMatchSnapshot();
   });
   it('可以点击某个title，让它的content出现', () => {
@@ -54,11 +58,15 @@ describe('测试Collapse组件', () => {
       );
     };
     const { asFragment } = render(<Temp />);
-    fireEvent.click(screen.getByText('标题一'));
-    expect(screen.getByText('内容1')).toBeVisible();
-    fireEvent.click(screen.getByText('标题二'));
-    expect(screen.getByText('内容1')).toBeVisible();
-    expect(screen.getByText('内容2')).toBeVisible();
+    act(() => {
+      fireEvent.click(screen.getByText('标题一'));
+    });
+    expect(screen.getByText('内容1')).toBeInTheDocument();
+    act(() => {
+      fireEvent.click(screen.getByText('标题二'));
+    });
+    expect(screen.getByText('内容2')).toBeInTheDocument();
+    expect(screen.queryByText('内容3')).not.toBeInTheDocument();
   });
   it('带有singled', () => {
     const Temp = () => {
@@ -80,9 +88,9 @@ describe('测试Collapse组件', () => {
     };
     const { asFragment } = render(<Temp />);
     fireEvent.click(screen.getByText('标题一'));
-    expect(screen.getByText('内容1')).toBeVisible();
+    expect(screen.getByText('内容1')).toBeInTheDocument();
     fireEvent.click(screen.getByText('标题二'));
     expect(screen.queryByText('内容1')).not.toBeInTheDocument();
-    expect(screen.getByText('内容2')).toBeVisible();
+    expect(screen.getByText('内容2')).toBeInTheDocument();
   });
 });

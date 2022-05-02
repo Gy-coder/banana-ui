@@ -130,8 +130,9 @@ const Component: FC<Props> = (props) => {
                   active: params.curIndex === index,
                 })}
                 onClick={() => handleClickDot(index)}
+                key={item as number}
               >
-                <button>{index + 1}</button>
+                <button />
               </span>
             );
           })}

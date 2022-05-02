@@ -1,5 +1,4 @@
 import Select from '../Select';
-import Option from '../Option';
 import React, { useState } from 'react';
 import {
   act,
@@ -11,14 +10,20 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+import { config } from 'react-transition-group';
+
+config.disabled = true;
+
+const { Option } = Select;
+
 describe('test select component', () => {
   let value: string, setValue: React.Dispatch<string>;
   let wrapper: RenderResult;
 
   const Demo = () => {
     [value, setValue] = useState('');
-    const handleChange = (newValue: string) => {
-      setValue(newValue);
+    const handleChange = (newValue: string | string[]) => {
+      setValue(newValue as string);
     };
     return (
       <Select value={value} onChange={handleChange}>
@@ -38,11 +43,9 @@ describe('test select component', () => {
     const selector =
       wrapper.container.getElementsByClassName('g-select-selector')[0];
     fireEvent.click(selector);
-    await waitFor(() => {
-      expect(wrapper.queryByText('jack')).toBeInTheDocument();
-      expect(wrapper.queryByText('lucy')).toBeInTheDocument();
-      expect(wrapper.queryByText('Yiminghe')).toBeInTheDocument();
-    });
+    expect(wrapper.queryByText('jack')).toBeInTheDocument();
+    expect(wrapper.queryByText('lucy')).toBeInTheDocument();
+    expect(wrapper.queryByText('Yiminghe')).toBeInTheDocument();
   });
   it('should click option', async () => {
     const selector =
@@ -56,16 +59,16 @@ describe('test select component', () => {
       expect(value).toBe('jack');
     });
   });
-  xit('click outside should hide the dropdown', async () => {
+  it('click outside should hide the dropdown', async () => {
     fireEvent.click(
       wrapper.container.getElementsByClassName('g-select-selector')[0],
     );
     // input change
     expect(wrapper.queryByText('jack')).toBeInTheDocument();
     fireEvent.click(document);
-    await waitFor(() => {
-      expect(wrapper.queryByText('jack')).toBeInTheDocument();
-    });
-    // expect(wrapper.asFragment()).toMatchSnapshot();
+    expect(wrapper.queryByText('jack')).not.toBeInTheDocument();
+    expect(
+      wrapper.container.querySelector('.g-select-dropdown'),
+    ).not.toBeInTheDocument();
   });
 });

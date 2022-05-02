@@ -6,7 +6,7 @@ export interface OptionProps {
   value: string;
   onClick?: (value: string) => void;
   onHover?: (index: number) => void;
-  index: number;
+  index?: number;
   disabled?: boolean;
 }
 
@@ -20,7 +20,7 @@ const Option: React.FC<OptionProps> = (props) => {
   };
   const handleMouseEnter = () => {
     if (disabled) return;
-    onHover && onHover(index);
+    onHover && onHover(index!);
   };
   const isSelected = useMemo(() => {
     if (multiple) return selectedValue.includes(value);

@@ -102,8 +102,6 @@ const LightUp: React.FC<LightUpProps> = (props) => {
   };
   const handleClose = () => {
     close();
-    setDeg(0);
-    setN(1);
   };
   const PlusN = () => {
     if (n > 8) return;
@@ -113,12 +111,17 @@ const LightUp: React.FC<LightUpProps> = (props) => {
     if (n <= 0.125) return;
     setN(n / 2);
   };
+  const handleOnExited = () => {
+    setDeg(0);
+    setN(1);
+  };
   const render = () => {
     return (
       <CSSTransition
         in={visible}
         timeout={300}
         classNames="animation"
+        onExited={handleOnExited}
         unmountOnExit
       >
         <div
